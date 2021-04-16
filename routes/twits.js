@@ -3,19 +3,36 @@ const router = express.Router({ mergeParams: true });
 const Twit = require('../models/Twit');
 const User = require('../models/User');
 
-router.get('/twits', (req, res) => {
-  res.send(`Get all twits by ${req.params.username}`);
+// Get all twits from a specific user
+// GET Route
+router.get('/twits', async (req, res) => {
+  try {
+    const user = await User.findOne({ username: req.params.username });
+
+    if (!user) {
+      return res.status(400).json({ msg: 'User not found', success: false });
+    }
+
+    const twits = await Twit.find({ user: user._id });
+
+    res.status(200).json({ msg: 'Twits found', success: true, data: twits });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ msg: 'Server error', success: false, error: error.message });
+  }
 });
 
 router.get('/twits/:id', (req, res) => {
   res.send(`${req.params.id} by ${req.params.username}`);
 });
 
+// Create a Twit
+// POST Route
+// Will require authentication
 router.post('/twits', async (req, res) => {
   try {
     const user = await User.findOne({ username: req.params.username });
-
-    console.log(user);
 
     if (!user) {
       return res.status(400).json({ msg: 'User not found', success: false });
