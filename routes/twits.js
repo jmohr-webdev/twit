@@ -5,6 +5,7 @@ const User = require('../models/User');
 
 // Get all twits from a specific user
 // GET Route
+// No authentication needed
 router.get('/twits', async (req, res) => {
   try {
     const user = await User.findOne({ username: req.params.username });
@@ -23,13 +24,28 @@ router.get('/twits', async (req, res) => {
   }
 });
 
-router.get('/twits/:id', (req, res) => {
-  res.send(`${req.params.id} by ${req.params.username}`);
+// Get a single twit
+// GET Route
+// No authentication needed
+router.get('/twits/:id', async (req, res) => {
+  try {
+    const twit = await Twit.findOne({ _id: req.params.id });
+
+    if (!twit) {
+      return res.status(400).json({ msg: 'Twit not found', success: false });
+    }
+
+    res.status(200).json({ msg: 'Twit found', success: true, data: twit });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ msg: 'Server error', success: false, error: error.message });
+  }
 });
 
 // Create a Twit
 // POST Route
-// Will require authentication
+// WILL REQUIRE AUTHENTICATION
 router.post('/twits', async (req, res) => {
   try {
     const user = await User.findOne({ username: req.params.username });
@@ -54,6 +70,27 @@ router.post('/twits', async (req, res) => {
       success: false,
       error: error.message,
     });
+  }
+});
+
+// Delete a twit
+// DELETE Route
+// WILL REQUIRE AUTHENTICATION
+router.delete('/twits/:id', async (req, res) => {
+  try {
+    const twitToDelete = await Twit.findOneAndDelete({ _id: req.params.id });
+
+    if (!twitToDelete) {
+      return res.status(400).json({ msg: 'Twit not found', success: false });
+    }
+
+    res
+      .status(200)
+      .json({ msg: 'Twit deleted', success: true, data: twitToDelete });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ msg: 'Server error', success: false, error: error.message });
   }
 });
 
