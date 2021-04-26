@@ -53,10 +53,6 @@ router.post('/', async (req, res) => {
 
 // PUT ROUTE
 // Updates a user's account or profile
-// Requires authentication
-
-// DELETE ROUTE
-// Deletes a user
-// Requires authentication
+// WILL REQUIRE AUTHENTICATION
 
 module.exports = router;
