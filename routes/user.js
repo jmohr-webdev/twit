@@ -6,6 +6,15 @@ const Profile = require('../models/Profile');
 
 const router = express.Router();
 
+// GET ROUTE
+// Get all users
+router.get('/', async (req, res) => {
+  const users = await User.find();
+  res
+    .status(200)
+    .json({ msg: 'Find all users', count: users.length, users: users });
+});
+
 // POST ROUTE
 // Registers a new user
 router.post('/', async (req, res) => {
@@ -55,8 +64,6 @@ router.post('/', async (req, res) => {
           msg: `Created ${newUser.username} account and profile`,
           success: true,
           token,
-          account: newUser,
-          profile: newProfile,
         });
       }
     );
