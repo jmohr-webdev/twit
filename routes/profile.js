@@ -1,14 +1,9 @@
 const express = require('express');
 const User = require('../models/User');
 const Profile = require('../models/Profile');
+const auth = require('../middleware/auth');
 
 const router = express.Router({ mergeParams: true });
-
-// CREATE
-// POST Route
-// Will Require Authentication
-// Note - do not think I will need, will isntead automatically create profile when user is created
-router.post('/');
 
 // READ
 // GET Route
@@ -42,8 +37,8 @@ router.get('/', async (req, res) => {
 
 // UPDATE
 // PUT Route
-// Will Require Authentication
-router.put('/', async (req, res) => {
+// Requires authentication
+router.put('/', auth, async (req, res) => {
   try {
     const user = await User.findOne({ username: req.params.username });
 
@@ -89,8 +84,8 @@ router.put('/', async (req, res) => {
 
 // DELETE
 // DELETE Route
-// Will Require Authentication
-router.delete('/', async (req, res) => {
+// Requires Authentication - STILL HAVEN'T TESTED
+router.delete('/', auth, async (req, res) => {
   try {
     const userToDelete = await User.findOne({ username: req.params.username });
 
