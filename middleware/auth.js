@@ -27,10 +27,7 @@ module.exports = async function (req, res, next) {
       }
 
       // Check to see if token belongs to user whose route is being accessed
-      const currentUser = JSON.stringify(decoded.user.id);
-      const userId = JSON.stringify(user._id);
-
-      if (currentUser !== userId) {
+      if (decoded.user.id !== user._id.toString()) {
         return res.status(401).json({ msg: 'Unauthorized', success: false });
       }
 

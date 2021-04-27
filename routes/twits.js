@@ -51,7 +51,7 @@ router.post('/', auth, async (req, res) => {
   try {
     const newTwit = new Twit({
       content: req.body.content,
-      user: user._id,
+      user: req.user.id,
     });
 
     await Twit.create(newTwit);
@@ -61,7 +61,7 @@ router.post('/', auth, async (req, res) => {
       .json({ msg: 'New twit created', success: true, data: newTwit });
   } catch (error) {
     res.status(500).json({
-      msg: 'Something went wrong',
+      msg: 'Something went wrong, no twit created',
       success: false,
       error: error.message,
     });
