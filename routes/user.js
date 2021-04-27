@@ -1,13 +1,10 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const User = require('../models/User');
+const Profile = require('../models/Profile');
 
 const router = express.Router();
-const User = require('../models/User');
-
-router.get('/:id', (req, res) => {
-  res.send(`Getting profile of ${req.params.id}`);
-});
 
 // POST ROUTE
 // Creates a new user
@@ -27,7 +24,7 @@ router.post('/', async (req, res) => {
         .json({ msg: 'User already exists', success: false });
     }
 
-    const newUser = new User({
+    let newUser = new User({
       username,
       email,
       password,
@@ -37,13 +34,18 @@ router.post('/', async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     newUser.password = await bcrypt.hash(password, salt);
 
-    await User.create(newUser);
+    newUser = await User.create(newUser);
 
-    res
-      .status(200)
-      .json({ msg: 'New user created', success: true, data: newUser });
+    const newProfile = await Profile.create({ user: newUser._id });
+
+    res.status(200).json({
+      msg: 'New user and profile created',
+      success: true,
+      data: newUser,
+      profile: newProfile,
+    });
   } catch (error) {
-    res.status(400).json({
+    res.status(500).json({
       msg: 'There was an issue',
       success: false,
       errorMsg: error.message,
@@ -52,7 +54,7 @@ router.post('/', async (req, res) => {
 });
 
 // PUT ROUTE
-// Updates a user's account or profile
+// Updates a user's account
 // WILL REQUIRE AUTHENTICATION
 
 module.exports = router;
