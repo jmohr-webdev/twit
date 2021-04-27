@@ -7,7 +7,7 @@ const Profile = require('../models/Profile');
 const router = express.Router();
 
 // POST ROUTE
-// Creates a new user
+// Registers a new user
 router.post('/', async (req, res) => {
   try {
     const { username, email, password } = req.body;
@@ -38,12 +38,28 @@ router.post('/', async (req, res) => {
 
     const newProfile = await Profile.create({ user: newUser._id });
 
-    res.status(200).json({
-      msg: 'New user and profile created',
-      success: true,
-      data: newUser,
-      profile: newProfile,
-    });
+    const payload = {
+      user: {
+        id: newUser._id,
+      },
+    };
+
+    // Return json web token
+    jwt.sign(
+      payload,
+      process.env.JWTSECRET,
+      { expiresIn: '5 days' },
+      (error, token) => {
+        if (error) throw error;
+        res.json({
+          msg: `Created ${newUser.username} account and profile`,
+          success: true,
+          token,
+          account: newUser,
+          profile: newProfile,
+        });
+      }
+    );
   } catch (error) {
     res.status(500).json({
       msg: 'There was an issue',

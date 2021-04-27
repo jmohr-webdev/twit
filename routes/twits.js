@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router({ mergeParams: true });
 const Twit = require('../models/Twit');
 const User = require('../models/User');
+const auth = require('../middleware/auth');
 
 // Get all twits from a specific user
 // GET Route
@@ -45,15 +46,9 @@ router.get('/:id', async (req, res) => {
 
 // Create a Twit
 // POST Route
-// WILL REQUIRE AUTHENTICATION
-router.post('/', async (req, res) => {
+// Requires Authentication
+router.post('/', auth, async (req, res) => {
   try {
-    const user = await User.findOne({ username: req.params.username });
-
-    if (!user) {
-      return res.status(400).json({ msg: 'User not found', success: false });
-    }
-
     const newTwit = new Twit({
       content: req.body.content,
       user: user._id,
@@ -75,8 +70,8 @@ router.post('/', async (req, res) => {
 
 // Delete a twit
 // DELETE Route
-// WILL REQUIRE AUTHENTICATION
-router.delete('/:id', async (req, res) => {
+// Requires Authentication
+router.delete('/:id', auth, async (req, res) => {
   try {
     const twitToDelete = await Twit.findOneAndDelete({ _id: req.params.id });
 
