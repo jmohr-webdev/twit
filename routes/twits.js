@@ -17,7 +17,14 @@ router.get('/', async (req, res) => {
 
     const twits = await Twit.find({ user: user._id });
 
-    res.status(200).json({ msg: 'Twits found', success: true, data: twits });
+    res
+      .status(200)
+      .json({
+        msg: 'Twits found',
+        count: twits.length,
+        success: true,
+        data: twits,
+      });
   } catch (error) {
     res
       .status(500)

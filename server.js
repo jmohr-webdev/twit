@@ -5,6 +5,7 @@ const connectDB = require('./config/db');
 const user = require('./routes/user');
 const twits = require('./routes/twits');
 const profile = require('./routes/profile');
+const auth = require('./routes/auth');
 
 const app = express();
 dotenv.config({ path: './config/config.env' });
@@ -19,6 +20,7 @@ const PORT = process.env.PORT || 5000;
 
 // Routes
 app.use('/api/v1/', user);
+app.use('/api/v1/auth', auth);
 app.use('/api/v1/:username/', profile);
 app.use('/api/v1/:username/twits/', twits);
 
