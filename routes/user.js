@@ -6,8 +6,10 @@ const Profile = require('../models/Profile');
 
 const router = express.Router();
 
-// GET ROUTE
+// ************ GET ROUTE ************
+// Route: GET /api/v1
 // Get all users
+// does not require authentication
 router.get('/', async (req, res) => {
   const users = await User.find();
   res
@@ -15,8 +17,10 @@ router.get('/', async (req, res) => {
     .json({ msg: 'Find all users', count: users.length, users: users });
 });
 
-// POST ROUTE
+// ************ POST ROUTE ************
+// Route: POST /api/v1/
 // Registers a new user
+// does not require authentication
 router.post('/', async (req, res) => {
   try {
     const { username, email, password } = req.body;
@@ -45,7 +49,7 @@ router.post('/', async (req, res) => {
 
     newUser = await User.create(newUser);
 
-    const newProfile = await Profile.create({ user: newUser._id });
+    await Profile.create({ user: newUser._id });
 
     const payload = {
       user: {

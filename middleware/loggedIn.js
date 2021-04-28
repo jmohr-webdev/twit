@@ -12,27 +12,17 @@ module.exports = async function (req, res, next) {
     return res.status(401).json({ msg: 'No token, authorization denied' });
   }
 
-  // Check to make sure current user accessing route is the same
-  const user = await User.findOne({ username: req.params.username });
-
-  if (!user) {
-    return res.status(400).json({ msg: 'User not found', success: false });
-  }
-
   // Verify token
   try {
     jwt.verify(token, process.env.JWTSECRET, (error, decoded) => {
       if (error) {
         return res.status(401).json({ msg: 'Token is not valid' });
       }
-
-      // Check to see if token belongs to user whose route is being accessed
-      if (decoded.user.id !== user._id.toString()) {
-        return res.status(401).json({ msg: 'Unauthorized', success: false });
-      }
-
       // Sets user
       req.user = decoded.user;
+      console.log(token);
+      console.log(decoded.user);
+      console.log(req.user);
       next();
     });
   } catch (error) {

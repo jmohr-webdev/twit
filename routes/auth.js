@@ -5,39 +5,41 @@ const User = require('../models/User');
 
 const router = express.Router();
 
-// POST route
+// ************ POST ROUTE ************
+// Route: POST /api/v1/auth/login
 // Login and get token
 router.post('/login', async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
+    // Finds user by email or username
     let user = await User.findOne({
       $or: [{ username }, { email }],
     }).select('+password');
 
+    // Returns error if user does not exist
     if (!user) {
       return res
         .status(400)
         .json({ msg: 'Invalid credentials', success: false });
     }
 
+    // Checks if password is correct
     const passwordMatch = await bcrypt.compare(password, user.password);
 
-    console.log(passwordMatch);
-
+    // Returns error if password is incorrect
     if (!passwordMatch) {
       return res
         .status(400)
         .json({ msg: 'Invalid credentials', success: false });
     }
 
+    // Returns token
     const payload = {
       user: {
         id: user.id,
       },
     };
-
-    console.log(payload);
 
     jwt.sign(
       payload,

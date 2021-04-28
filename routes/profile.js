@@ -2,12 +2,14 @@ const express = require('express');
 const User = require('../models/User');
 const Profile = require('../models/Profile');
 const auth = require('../middleware/auth');
+const loggedIn = require('../middleware/loggedIn');
 
 const router = express.Router({ mergeParams: true });
 
-// READ
-// GET Route
-// Does Not Require Authentication
+// ************ GET ROUTE ************
+// Route: GET /api/v1/:username/
+// Gets a user's profile
+// does not require authentication
 router.get('/', async (req, res) => {
   try {
     const user = await User.findOne({ username: req.params.username });
@@ -35,9 +37,10 @@ router.get('/', async (req, res) => {
   }
 });
 
-// UPDATE
-// PUT Route
-// Requires authentication
+// ************ PUT ROUTE ************
+// Route: PUT /api/v1/:username/
+// Updates user's profile
+// requires authentication
 router.put('/', auth, async (req, res) => {
   try {
     const user = await User.findOne({ username: req.params.username });
@@ -82,9 +85,10 @@ router.put('/', auth, async (req, res) => {
   }
 });
 
-// DELETE
-// DELETE Route
-// Requires Authentication - STILL HAVEN'T TESTED
+// ************ DELETE ROUTE ************
+// Route: DELETE /api/v1/:username/
+// Deletes user's profile
+// requires authentication
 router.delete('/', auth, async (req, res) => {
   try {
     const userToDelete = await User.findOne({ username: req.params.username });
@@ -111,6 +115,35 @@ router.delete('/', auth, async (req, res) => {
       success: false,
       errorMsg: error.message,
     });
+  }
+});
+
+// 👍 FOLLOW AND UNFOLLOW 👎
+// ************ POST ROUTE ************
+// Route: POST /api/v1/:username/follow
+// Follows a user
+// requires user to be logged in
+router.post('/follow', loggedIn, async (req, res) => {
+  try {
+    res
+      .status(200)
+      .json({ msg: `Will eventually follow ${req.params.username}` });
+  } catch (error) {
+    res.status(500).json({ msg: 'Server error', error: error.message });
+  }
+});
+
+// ************ POST ROUTE ************
+// Route: POST /api/v1/:username/unfollow
+// Unfollows a user
+// requires user to be logged in
+router.post('/unfollow', loggedIn, async (req, res) => {
+  try {
+    res
+      .status(200)
+      .json({ msg: `Will eventually unfollow ${req.params.username}` });
+  } catch (error) {
+    res.status(500).json({ msg: 'Server error', error: error.message });
   }
 });
 

@@ -4,9 +4,10 @@ const Twit = require('../models/Twit');
 const User = require('../models/User');
 const auth = require('../middleware/auth');
 
+// ************ GET ROUTE ************
+// Route: GET /api/v1/:username/twits/
 // Get all twits from a specific user
-// GET Route
-// No authentication needed
+// does not require authentication
 router.get('/', async (req, res) => {
   try {
     const user = await User.findOne({ username: req.params.username });
@@ -17,14 +18,12 @@ router.get('/', async (req, res) => {
 
     const twits = await Twit.find({ user: user._id });
 
-    res
-      .status(200)
-      .json({
-        msg: 'Twits found',
-        count: twits.length,
-        success: true,
-        data: twits,
-      });
+    res.status(200).json({
+      msg: 'Twits found',
+      count: twits.length,
+      success: true,
+      data: twits,
+    });
   } catch (error) {
     res
       .status(500)
@@ -32,9 +31,10 @@ router.get('/', async (req, res) => {
   }
 });
 
+// ************ GET ROUTE ************
+// Route: GET /api/v1/:username/twits/:id
 // Get a single twit
-// GET Route
-// No authentication needed
+// does not require authentication
 router.get('/:id', async (req, res) => {
   try {
     const twit = await Twit.findOne({ _id: req.params.id });
@@ -51,9 +51,10 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// Create a Twit
-// POST Route
-// Requires Authentication
+// ************ POST ROUTE ************
+// Route: POST /api/v1/:username/twits/
+// Creates a twit
+// requires authentication
 router.post('/', auth, async (req, res) => {
   try {
     const newTwit = new Twit({
@@ -75,9 +76,10 @@ router.post('/', auth, async (req, res) => {
   }
 });
 
-// Delete a twit
-// DELETE Route
-// Requires Authentication
+// ************ DELETE ROUTE ************
+// Route: DELETE /api/v1/:username/twits/:id
+// Deletes a specific twit
+// requires authentication
 router.delete('/:id', auth, async (req, res) => {
   try {
     const twitToDelete = await Twit.findOneAndDelete({ _id: req.params.id });
