@@ -20,9 +20,6 @@ module.exports = async function (req, res, next) {
       }
       // Sets user
       req.user = decoded.user;
-      console.log(token);
-      console.log(decoded.user);
-      console.log(req.user);
       next();
     });
   } catch (error) {
