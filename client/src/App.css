@@ -1,0 +1,261 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;800&family=Raleway:wght@400;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  color: #1b1521;
+}
+
+.container {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  background: #d41e45;
+  background: #d41e45 url('./img/photo-1523731407965-2430cd12f5e4.jpg');
+  background-size: cover;
+}
+
+.overlay {
+  width: 100%;
+  min-height: 100vh;
+  background-color: rgba(212, 30, 69, 0.85);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 3px solid #ff798f;
+}
+
+.navbar h1 {
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.navbar {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 50px;
+  background: #1b1521;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 100px;
+  padding-top: 8px;
+}
+
+.navbar-auth {
+  border-bottom: 1px solid #ff798f;
+}
+
+.signup-form {
+  width: 80%;
+  max-width: 500px;
+  margin: 75px auto 20px;
+}
+
+.input-field {
+  display: flex;
+  justify-content: center;
+}
+
+.input-field i {
+  height: 50px;
+  width: 50px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-left: 1px solid rgba(255, 255, 255, 0.9);
+  border-top: 1px solid rgba(255, 255, 255, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 5px 0 0 5px;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(27, 21, 33, 0.4);
+}
+
+.signup-form input {
+  height: 50px;
+  width: 100%;
+  margin-bottom: 20px;
+  border-radius: 0 5px 5px 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  outline: none;
+  padding: 20px;
+  transition: all 0.2s ease-in;
+}
+.signup-form input:focus {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.btn.signup {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  border: 0;
+  border-radius: 5px;
+  background-color: #1b1521;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 1.25rem;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn.signup:hover {
+  transform: scale(1.02);
+}
+
+.login-text {
+  color: #ccc;
+  font-size: 0.8 rem;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.login-text a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.login-text a:hover {
+  text-decoration: underline;
+}
+
+.circle-container {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  top: 0;
+  height: 70px;
+  width: 100%;
+  background-color: #33322d;
+  border-bottom: 2px solid #542d51;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.circle-icon {
+  height: 50px;
+  width: 50px;
+  margin: 10px 20px 10px 0;
+  background-color: #ff798f;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: all 0.3s ease-in;
+}
+
+.circle-icon:first-child {
+  margin-left: 20px;
+}
+
+.circle-icon:last-child {
+  margin-right: 20px;
+}
+
+.circle-icon:hover {
+  background-color: #008716;
+}
+
+.twit-timeline {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+}
+
+.twit-container {
+  width: 80%;
+  max-width: 600px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #fff;
+  margin-bottom: 20px;
+}
+
+.author-container {
+  display: flex;
+  align-items: center;
+}
+
+.avatar img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+  border: 3px solid #1b1521;
+}
+
+.author {
+  margin-left: 10px;
+  font-weight: 600;
+  color: #542d51;
+}
+
+.date {
+  margin-top: 10px;
+}
+
+.date p {
+  font-size: 0.8em;
+  color: #33322d;
+}
+
+.add-button {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #008716;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  right: 20px;
+  bottom: 20px;
+  transition: all 0.3s ease-in;
+}
+
+.add-button:hover {
+  background-color: #1ed442;
+}
+
+.add-button i {
+  color: #fff;
+  font-size: 1.25rem;
+}
+
+.hide-on-small {
+  visibility: hidden;
+}
+
+@media screen and (min-width: 576px) {
+  .hide-on-small {
+    visibility: visible;
+    z-index: 2;
+  }
+
+  .circle-container {
+    background-color: rgba(0, 0, 0, 0.25);
+    justify-content: right;
+    flex-direction: column;
+    align-items: center;
+    width: 80px;
+    height: 100%;
+    left: 0;
+    padding-top: 70px;
+    border-bottom: 3px solid #ff798f;
+  }
+
+  .circle-icon {
+    margin-left: 20px;
+  }
+}
