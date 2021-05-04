@@ -1,9 +1,14 @@
+import Navbar from './components/layout/Navbar';
+import LoginForm from './components/auth/LoginForm';
 import './App.css';
 
 function App() {
   return (
     <div className="container">
-      <header>Test</header>
+      <div className="overlay">
+        <Navbar />
+        <LoginForm />
+      </div>
     </div>
   );
 }

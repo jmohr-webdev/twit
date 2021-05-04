@@ -3,99 +3,16 @@ const router = express.Router({ mergeParams: true });
 const Twit = require('../models/Twit');
 const User = require('../models/User');
 const auth = require('../middleware/auth');
+const {
+  getUserTwits,
+  getSingleTwit,
+  createATwit,
+  deleteATwit,
+} = require('../controllers/twits');
 
-// ************ GET ROUTE ************
-// Route: GET /api/v1/:username/twits/
-// Get all twits from a specific user
-// does not require authentication
-router.get('/', async (req, res) => {
-  try {
-    const user = await User.findOne({ username: req.params.username });
+// Route: /api/v1/:username/twits/
 
-    if (!user) {
-      return res.status(400).json({ msg: 'User not found', success: false });
-    }
-
-    const twits = await Twit.find({ user: user._id });
-
-    res.status(200).json({
-      msg: 'Twits found',
-      count: twits.length,
-      success: true,
-      data: twits,
-    });
-  } catch (error) {
-    res
-      .status(500)
-      .json({ msg: 'Server error', success: false, error: error.message });
-  }
-});
-
-// ************ GET ROUTE ************
-// Route: GET /api/v1/:username/twits/:id
-// Get a single twit
-// does not require authentication
-router.get('/:id', async (req, res) => {
-  try {
-    const twit = await Twit.findOne({ _id: req.params.id });
-
-    if (!twit) {
-      return res.status(400).json({ msg: 'Twit not found', success: false });
-    }
-
-    res.status(200).json({ msg: 'Twit found', success: true, data: twit });
-  } catch (error) {
-    res
-      .status(500)
-      .json({ msg: 'Server error', success: false, error: error.message });
-  }
-});
-
-// ************ POST ROUTE ************
-// Route: POST /api/v1/:username/twits/
-// Creates a twit
-// requires authentication
-router.post('/', auth, async (req, res) => {
-  try {
-    const newTwit = new Twit({
-      content: req.body.content,
-      user: req.user.id,
-    });
-
-    await Twit.create(newTwit);
-
-    res
-      .status(200)
-      .json({ msg: 'New twit created', success: true, data: newTwit });
-  } catch (error) {
-    res.status(500).json({
-      msg: 'Something went wrong, no twit created',
-      success: false,
-      error: error.message,
-    });
-  }
-});
-
-// ************ DELETE ROUTE ************
-// Route: DELETE /api/v1/:username/twits/:id
-// Deletes a specific twit
-// requires authentication
-router.delete('/:id', auth, async (req, res) => {
-  try {
-    const twitToDelete = await Twit.findOneAndDelete({ _id: req.params.id });
-
-    if (!twitToDelete) {
-      return res.status(400).json({ msg: 'Twit not found', success: false });
-    }
-
-    res
-      .status(200)
-      .json({ msg: 'Twit deleted', success: true, data: twitToDelete });
-  } catch (error) {
-    res
-      .status(500)
-      .json({ msg: 'Server error', success: false, error: error.message });
-  }
-});
+router.route('/').get(getUserTwits).post(auth, createATwit);
+router.route('/:id').get(getSingleTwit).delete(auth, deleteATwit);
 
 module.exports = router;
