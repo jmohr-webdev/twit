@@ -81,7 +81,7 @@ exports.createATwit = asyncHandler(async (req, res, next) => {
 // requires authentication
 exports.deleteATwit = asyncHandler(async (req, res, next) => {
   try {
-    const twitToDelete = await Twit.findOneAndDelete({ _id: req.params.id });
+    const twitToDelete = await Twit.deleteOne({ _id: req.params.id });
 
     if (!twitToDelete) {
       return res.status(400).json({ msg: 'Twit not found', success: false });

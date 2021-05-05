@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router({ mergeParams: true });
-const Twit = require('../models/Twit');
-const User = require('../models/User');
 const auth = require('../middleware/auth');
 const {
   getUserTwits,
