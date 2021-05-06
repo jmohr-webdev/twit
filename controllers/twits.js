@@ -1,4 +1,3 @@
-const express = require('express');
 const Twit = require('../models/Twit');
 const User = require('../models/User');
 const asyncHandler = require('../middleware/async');
