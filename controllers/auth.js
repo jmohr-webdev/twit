@@ -8,11 +8,11 @@ const asyncHandler = require('../middleware/async');
 // Login and get token
 exports.login = asyncHandler(async (req, res, next) => {
   try {
-    const { username, email, password } = req.body;
+    const { usernameOrEmail, password } = req.body;
 
     // Finds user by email or username
     let user = await User.findOne({
-      $or: [{ username }, { email }],
+      $or: [{ username: usernameOrEmail }, { email: usernameOrEmail }],
     }).select('+password');
 
     // Returns error if user does not exist
