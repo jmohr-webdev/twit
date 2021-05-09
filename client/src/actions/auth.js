@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { popupToast } from '../actions/toast';
 import {
   LOGOUT,
   REGISTER_SUCCESS,
@@ -24,9 +25,8 @@ export const register = ({ username, email, password }) => async (dispatch) => {
       payload: res.data,
     });
   } catch (error) {
-    console.error(error.response.data.msg);
-
     dispatch({ type: REGISTER_FAIL });
+    dispatch(popupToast(error.response.data.msg, 'failure'));
   }
 };
 
@@ -46,10 +46,11 @@ export const login = ({ usernameOrEmail, password }) => async (dispatch) => {
       type: LOGIN_SUCCESS,
       payload: res.data,
     });
-  } catch (error) {
-    console.error(error.response.data.msg);
 
+    dispatch(popupToast('Logged in', 'success'));
+  } catch (error) {
     dispatch({ type: LOGIN_FAIL });
+    dispatch(popupToast(error.response.data.msg, 'failure'));
   }
 };
 

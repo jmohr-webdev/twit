@@ -19,7 +19,6 @@ function authReducer(state = initialState, action) {
   switch (type) {
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
-      console.log('success');
       localStorage.setItem('token', payload.token);
       return {
         ...state,

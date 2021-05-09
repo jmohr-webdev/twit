@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
-import authReducer from './auth';
+import auth from './auth';
+import toast from './toast';
 
-export default combineReducers({ authReducer });
+export default combineReducers({ auth, toast });

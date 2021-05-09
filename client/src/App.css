@@ -244,6 +244,47 @@
   visibility: hidden;
 }
 
+/* ******************* TOAST ******************* */
+
+.toast {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 10px;
+  right: 10px;
+  text-align: center;
+  padding: 20px;
+  width: 300px;
+  height: 20px;
+  font-weight: 600;
+  border-radius: 5px;
+  text-transform: uppercase;
+  z-index: 2;
+  background-color: #fff;
+}
+
+.toast.success {
+  background-color: #008716;
+  color: #ccc;
+}
+
+.toast.failure {
+  background-color: #542d51;
+  color: #ccc;
+}
+
+.toast.light {
+  background-color: #ccc;
+}
+
+.toast.dark {
+  background-color: #1b1521;
+  color: #ccc;
+}
+
+/* ******************* MEDIA QUERIES ******************* */
+
 @media screen and (min-width: 576px) {
   .hide-on-small {
     visibility: visible;
