@@ -11,7 +11,6 @@ const { followUser, unfollowUser } = require('../controllers/follow');
 const router = express.Router({ mergeParams: true });
 
 // Route: /api/v1/:username/
-
 router
   .route('/')
   .get(getProfile)

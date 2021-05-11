@@ -1,6 +1,6 @@
 const express = require('express');
-
 const { getAllUsers, registerUser } = require('../controllers/user');
+const twitRouter = require('./twits');
 
 const router = express.Router();
 

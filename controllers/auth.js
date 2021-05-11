@@ -19,7 +19,7 @@ exports.login = asyncHandler(async (req, res, next) => {
     if (!user) {
       return res
         .status(400)
-        .json({ msg: 'Invalid credentials', success: false });
+        .json({ msg: 'No user by that name', success: false });
     }
 
     // Checks if password is correct
@@ -27,9 +27,7 @@ exports.login = asyncHandler(async (req, res, next) => {
 
     // Returns error if password is incorrect
     if (!passwordMatch) {
-      return res
-        .status(400)
-        .json({ msg: 'Invalid credentials', success: false });
+      return res.status(400).json({ msg: 'Wrong password', success: false });
     }
 
     // Returns token

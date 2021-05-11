@@ -10,7 +10,6 @@ const asyncHandler = require('../middleware/async');
 exports.followUser = asyncHandler(async (req, res, next) => {
   try {
     const user = await User.findOne({ _id: req.user.id });
-    const userToFollow = await User.findOne({ username: req.params.username });
 
     if (!user) {
       return res
@@ -18,36 +17,32 @@ exports.followUser = asyncHandler(async (req, res, next) => {
         .json({ msg: 'Current user does not exist', success: false });
     }
 
-    const userToFollowProfile = await Profile.findOne({
-      user: userToFollow._id,
-    });
+    const userToFollow = await User.findOne({ username: req.params.username });
 
-    if (!userToFollowProfile) {
+    if (!userToFollow) {
       return res
         .status(400)
         .json({ msg: 'User to follow does not exist', success: false });
     }
 
-    const userProfile = await Profile.findOne({ user: req.user.id });
-
-    userProfile.following.forEach((follow) => {
+    user.following.forEach((follow) => {
       if (userToFollow._id.toString() === follow.id.toString()) {
         return res.status(400).json({ msg: 'Already following this user' });
       }
     });
 
-    userProfile.following.push({
+    user.following.push({
       id: userToFollow._id,
       username: userToFollow.username,
     });
 
-    userToFollowProfile.followers.push({
+    userToFollow.followers.push({
       id: user._id,
       username: user.username,
     });
 
-    await userProfile.save();
-    await userToFollowProfile.save();
+    await user.save();
+    await userToFollow.save();
 
     res.status(200).json({
       msg: `${user.username} followed ${req.params.username}`,
@@ -67,26 +62,26 @@ exports.followUser = asyncHandler(async (req, res, next) => {
 exports.unfollowUser = asyncHandler(async (req, res, next) => {
   try {
     const user = await User.findOne({ _id: req.user.id });
-    const userProfile = await Profile.findOne({ user: req.user.id });
     const userToUnfollow = await User.findOne({
       username: req.params.username,
     });
+
     const userToUnfollowProfile = await Profile.findOne({
       user: userToUnfollow._id,
     });
 
-    userProfile.following = userProfile.following.filter((follow, index) => {
+    user.following = user.following.filter((follow, index) => {
       userToUnfollow._id.toString() !== follow.id.toString();
     });
 
-    userToUnfollowProfile.followers = userToUnfollowProfile.followers.filter(
+    userToUnfollow.followers = userToUnfollow.followers.filter(
       (follower, index) => {
         user._id.toString() !== follower.id.toString();
       }
     );
 
-    await userProfile.save();
-    await userToUnfollowProfile.save();
+    await user.save();
+    await userToUnfollow.save();
 
     res
       .status(200)

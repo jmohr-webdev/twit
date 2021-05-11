@@ -19,10 +19,10 @@ connectDB();
 const PORT = process.env.PORT || 5000;
 
 // Routes
-app.use('/api/v1/', user);
+app.use('/api/v1', user);
 app.use('/api/v1/auth', auth);
-app.use('/api/v1/:username/', profile);
-app.use('/api/v1/:username/twits/', twits);
+app.use('/api/v1/twits', twits);
+app.use('/api/v1/:username', profile);
 
 app.listen(PORT, () => {
   console.log(`Now listening on port ${PORT}`.rainbow.bgBlack);

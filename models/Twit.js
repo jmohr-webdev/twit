@@ -5,6 +5,7 @@ const TwitSchema = new mongoose.Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: 'user',
+    required: true,
   },
   content: {
     type: String,
