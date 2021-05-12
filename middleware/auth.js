@@ -36,7 +36,6 @@ module.exports = async function (req, res, next) {
       next();
     });
   } catch (error) {
-    console.log('something is wrong with auth middleware'.red);
     res.status(500).json({ msg: 'Server error' });
   }
 };

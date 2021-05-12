@@ -1,16 +1,13 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
 import Navbar from './components/layout/Navbar';
 import Toast from './components/layout/Toast';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import setAuthToken from './utility/setAuthToken';
 import { loadUser } from './actions/auth';
-
 import { Provider } from 'react-redux';
 import store from './store';
-
 import './App.css';
 
 if (localStorage.token) {

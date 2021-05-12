@@ -4,7 +4,7 @@ const User = require('../models/User');
 const asyncHandler = require('../middleware/async');
 
 // ************ GET ROUTE ************
-// Route: POST /api/v1/auth/
+// Route: GET /api/v1/auth/
 // Load user with token
 exports.loadUser = asyncHandler(async (req, res, next) => {
   try {

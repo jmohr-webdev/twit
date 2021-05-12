@@ -18,8 +18,7 @@ export const loadUser = () => async (dispatch) => {
   }
 
   try {
-    const res = axios.get('/api/v1/auth');
-
+    const res = await axios.get('/api/v1/auth');
     dispatch({
       type: USER_LOADED,
       payload: res.data,
@@ -49,6 +48,7 @@ export const register =
         type: REGISTER_SUCCESS,
         payload: res.data,
       });
+      dispatch(loadUser());
     } catch (error) {
       dispatch({ type: REGISTER_FAIL });
       dispatch(popupToast(error.response.data.msg, 'failure'));
@@ -73,8 +73,7 @@ export const login =
         type: LOGIN_SUCCESS,
         payload: res.data,
       });
-
-      dispatch(popupToast('Logged in', 'success'));
+      dispatch(loadUser());
     } catch (error) {
       dispatch({ type: LOGIN_FAIL });
       dispatch(popupToast(error.response.data.msg, 'failure'));
