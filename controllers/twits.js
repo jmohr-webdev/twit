@@ -80,7 +80,6 @@ exports.getUserTwits = asyncHandler(async (req, res, next) => {
 // Creates a twit
 // requires authentication
 exports.createATwit = asyncHandler(async (req, res, next) => {
-  console.log(req.user.id);
   try {
     const newTwit = new Twit({
       content: req.body.content,

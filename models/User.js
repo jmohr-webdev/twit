@@ -39,6 +39,7 @@ UserSchema.virtual('twits', {
   localField: '_id',
   foreignField: 'user',
   justOne: false,
+  options: { sort: { createdDate: -1 } },
 });
 
 module.exports = mongoose.model('User', UserSchema);

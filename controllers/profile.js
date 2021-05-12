@@ -8,7 +8,11 @@ const asyncHandler = require('../middleware/async');
 // does not require authentication
 exports.getProfile = asyncHandler(async (req, res, next) => {
   try {
-    const user = await User.findOne({ username: req.params.username });
+    const user = await User.findOne({ username: req.params.username }).populate(
+      { path: 'twits', select: 'content' }
+    );
+
+    const twits = user.twits;
 
     if (!user) {
       return res.status(400).json({
@@ -23,6 +27,8 @@ exports.getProfile = asyncHandler(async (req, res, next) => {
       msg: `Found profile of ${req.params.username}`,
       success: true,
       data: profile,
+      numberOfTwits: twits.length,
+      twits,
     });
   } catch (error) {
     res.status(500).json({

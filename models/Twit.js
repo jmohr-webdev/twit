@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const TwitSchema = new mongoose.Schema({
   user: {
-    type: Schema.Types.ObjectId,
-    ref: 'user',
+    type: mongoose.Schema.ObjectId,
+    ref: 'User',
     required: true,
   },
   content: {
