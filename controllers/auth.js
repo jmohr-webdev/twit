@@ -3,6 +3,18 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const asyncHandler = require('../middleware/async');
 
+// ************ GET ROUTE ************
+// Route: POST /api/v1/auth/
+// Load user with token
+exports.loadUser = asyncHandler(async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user.id).select('-password');
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ msg: error.message, success: false });
+  }
+});
+
 // ************ POST ROUTE ************
 // Route: POST /api/v1/auth/login
 // Login and get token
@@ -19,7 +31,7 @@ exports.login = asyncHandler(async (req, res, next) => {
     if (!user) {
       return res
         .status(400)
-        .json({ msg: 'No user by that name', success: false });
+        .json({ msg: 'Invalid credentials', success: false });
     }
 
     // Checks if password is correct
@@ -27,7 +39,9 @@ exports.login = asyncHandler(async (req, res, next) => {
 
     // Returns error if password is incorrect
     if (!passwordMatch) {
-      return res.status(400).json({ msg: 'Wrong password', success: false });
+      return res
+        .status(400)
+        .json({ msg: 'Invalid credentials', success: false });
     }
 
     // Returns token

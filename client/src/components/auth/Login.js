@@ -25,7 +25,7 @@ const Login = ({ login, isAuthenticated }) => {
   };
 
   if (isAuthenticated) {
-    <Redirect to="/" />;
+    return <Redirect to="/twits" />;
   }
 
   return (
