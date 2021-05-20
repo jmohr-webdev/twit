@@ -1,0 +1,44 @@
+.signup-form, 
+.login-form {
+  width: 80%;
+  max-width: 500px;
+  margin: 75px auto 20px;
+}
+
+.input-field {
+  display: flex;
+  justify-content: center;
+}
+
+.input-field i {
+  height: 50px;
+  width: 50px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-left: 1px solid rgba(255, 255, 255, 0.9);
+  border-top: 1px solid rgba(255, 255, 255, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 5px 0 0 5px;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(27, 21, 33, 0.4);
+}
+
+.signup-form input,
+.login-form input {
+  height: 50px;
+  width: 100%;
+  margin-bottom: 20px;
+  border-radius: 0 5px 5px 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  outline: none;
+  padding: 20px;
+  transition: all 0.2s ease-in;
+}
+
+.signup-form input:focus,
+.login-form input:focus {
+  background-color: rgba(255, 255, 255, 1);
+}

@@ -1,0 +1,42 @@
+/* ******************* NAVBAR ******************* */
+
+.navbar {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  top: 0;
+  width: 100%;
+  height: 50px;
+  background: #1b1521;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 100px;
+}
+
+.brand {
+  margin-left: 20px;
+  justify-self: center;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.navbar-auth {
+  border-bottom: 1px solid #ff798f;
+}
+
+.nav.nav-links {
+  display: flex;
+  position: absolute;
+  right: 10px;
+  list-style-type: none;
+}
+
+.nav-link {
+  margin-right: 20px;
+  color: #fff;
+  text-decoration: none;
+}
