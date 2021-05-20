@@ -19,7 +19,7 @@ exports.getTwits = asyncHandler(async (req, res, next) => {
       msg: 'Twits found',
       count: twits.length,
       success: true,
-      data: twits,
+      twits,
     });
   } catch (error) {
     res
@@ -81,8 +81,11 @@ exports.getUserTwits = asyncHandler(async (req, res, next) => {
 // requires authentication
 exports.createATwit = asyncHandler(async (req, res, next) => {
   try {
+    const user = await User.findById(req.user.id).select('-password');
+
     const newTwit = new Twit({
       content: req.body.content,
+      username: user.username,
       user: req.user.id,
     });
 

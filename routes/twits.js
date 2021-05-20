@@ -10,10 +10,10 @@ const {
   deleteATwit,
 } = require('../controllers/twits');
 
-// Route: /api/v1/dash/
+// Route: /api/v1/twits/
 router.route('/').get(getTwits);
 
-// Route: /api/v1/dash/post
+// Route: /api/v1/twits/post
 router.route('/post').post(loggedIn, createATwit);
 
 // Route: /api/v1/:username
