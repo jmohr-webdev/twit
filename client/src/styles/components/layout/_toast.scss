@@ -13,24 +13,24 @@
   border-radius: 5px;
   text-transform: uppercase;
   z-index: 2;
-  background-color: #fff;
+  background-color: $bright-white;
 }
 
 .toast.success {
-  background-color: #008716;
-  color: #ccc;
+  background-color: $action-color;
+  color: $base-white-color;
 }
 
 .toast.failure {
-  background-color: #542d51;
-  color: #ccc;
+  background-color: $danger-color;
+  color: $base-white-color;
 }
 
 .toast.light {
-  background-color: #ccc;
+  background-color: $base-white-color;
 }
 
 .toast.dark {
-  background-color: #1b1521;
-  color: #ccc;
+  background-color: $base-dark-color;
+  color: $base-white-color;
 }

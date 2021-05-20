@@ -9,10 +9,10 @@
 }
 
 .twit {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: $frosted-color;
   padding: 10px;
   border-radius: 5px;
-  border: 1px solid #fff;
+  border: 1px solid $bright-white;
   margin-bottom: 20px;
   width: 100%;
 }
@@ -40,7 +40,7 @@
 
 .twit-author {
   font-weight: 600;
-  color: #542d51;
+  color: $danger-color;
   margin-left: 10px;
 }
 

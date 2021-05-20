@@ -33,38 +33,6 @@
   background-color: #008716;
 } */
 
-.date {
-  margin-top: 10px;
-}
-
-.date p {
-  font-size: 0.8em;
-  color: #33322d;
-}
-
-.add-button {
-  position: fixed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #008716;
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  right: 20px;
-  bottom: 20px;
-  transition: all 0.3s ease-in;
-}
-
-.add-button:hover {
-  background-color: #1ed442;
-}
-
-.add-button i {
-  color: #fff;
-  font-size: 1.25rem;
-}
-
 .hide-on-small {
   visibility: hidden;
 }

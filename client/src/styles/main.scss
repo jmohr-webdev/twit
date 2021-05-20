@@ -4,8 +4,11 @@
 @import './components/auth/buttons';
 @import './components/layout/navbar';
 @import './components/layout/toast';
+@import './components/layout/modalbutton';
+@import './components//layout/modal';
 @import './components/twit';
 @import './media_queries/mediaqueries';
+@import './variables/colors';
 
 /* ******************* GLOBAL ******************* */
 * {
@@ -15,7 +18,7 @@
   font-size: 16px;
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
-  color: #1b1521;
+  color: $base-dark-color;
 }
 
 a {
@@ -27,19 +30,19 @@ a {
   position: relative;
   min-height: 100vh;
   width: 100%;
-  background: #d41e45;
-  background: #d41e45 url('../img/photo-1523731407965-2430cd12f5e4.jpg');
+  background: $bright-color;
+  background: url('../img/photo-1523731407965-2430cd12f5e4.jpg');
   background-size: cover;
 }
 
 .overlay {
   width: 100%;
   min-height: 100vh;
-  background-color: rgba(212, 30, 69, 0.85);
+  background-color: $overlay-color;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-bottom: 3px solid #ff798f;
+  border-bottom: 3px solid $light-border-color;
 }
 
 .hide-on-small {
