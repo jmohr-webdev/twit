@@ -7,12 +7,12 @@ import Moment from 'moment';
 import ModalButton from '../layout/ModalButton';
 import Modal from '../layout/Modal';
 
-const Home = ({ getAllTwits, twits }) => {
+const Home = ({ getAllTwits, twits, modalOpen }) => {
   useEffect(() => {
     getAllTwits();
   }, [getAllTwits]);
 
-  return (
+  return twits ? (
     <>
       <div className="twits-container">
         {twits.map((twit) => (
@@ -31,7 +31,12 @@ const Home = ({ getAllTwits, twits }) => {
         ))}
       </div>
       <ModalButton />
+      {modalOpen && <Modal />}
     </>
+  ) : (
+    <div>
+      <h1>No twits</h1>
+    </div>
   );
 };
 
@@ -41,7 +46,8 @@ Home.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  twits: state.twits,
+  twits: state.twits.twits,
+  modalOpen: state.modal.modalOpen,
 });
 
 export default connect(mapStateToProps, { getAllTwits })(Home);

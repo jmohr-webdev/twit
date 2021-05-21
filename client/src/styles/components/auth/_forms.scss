@@ -44,3 +44,22 @@
 .login-form input:focus {
   background-color: $bright-white;
 }
+
+.login-text,
+.signup-text {
+  color: $base-white-color;
+  font-size: 0.8 rem;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.login-text a,
+.signup-text a {
+  color: $bright-white;
+  text-decoration: none;
+}
+
+.login-text a:hover,
+.signup-text a:hover {
+  text-decoration: underline;
+}

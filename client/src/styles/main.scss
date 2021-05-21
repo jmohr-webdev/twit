@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;800&family=Raleway:wght@400;800&display=swap');
 
+@import './variables/colors';
+@import './variables/transforms';
 @import './components/auth/forms';
 @import './components/auth/buttons';
 @import './components/layout/navbar';
@@ -8,7 +10,6 @@
 @import './components//layout/modal';
 @import './components/twit';
 @import './media_queries/mediaqueries';
-@import './variables/colors';
 
 /* ******************* GLOBAL ******************* */
 * {

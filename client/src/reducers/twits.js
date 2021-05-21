@@ -1,13 +1,22 @@
-import { GET_ALL_TWITS, TWITS_ERROR } from '../actions/types';
+import { GET_ALL_TWITS, POST_TWIT, TWITS_ERROR } from '../actions/types';
 
-const initialState = [];
+const initialState = {
+  twits: [],
+  loading: true,
+};
 
 function twitReducer(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
     case GET_ALL_TWITS:
-      return state.concat(payload);
+      return {
+        ...state,
+        twits: payload,
+        loading: false,
+      };
+    case POST_TWIT:
+      return { ...state, twits: [payload, ...state.twits], loading: false };
     case TWITS_ERROR:
       console.log('There was an error getting the twits');
       return state;

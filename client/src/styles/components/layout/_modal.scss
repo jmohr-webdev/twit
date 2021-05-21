@@ -1,4 +1,4 @@
-// body {
+// .disabled-body {
 //   overflow: hidden;
 // }
 
@@ -16,11 +16,80 @@
 }
 
 .modal {
-  position: static;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
   width: 80%;
   max-width: 800px;
-  height: 500px;
+  height: 400px;
   margin-top: 100px;
-  background-color: $base-white-color;
+  background-color: $frosted-color;
   border-radius: 5px;
+}
+
+.modal-title {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background-color: $overlay-color;
+  padding: 10px;
+  color: $base-white-color;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: 'Raleway', serif;
+  font-size: 1.5em;
+  font-weight: 800;
+  border-radius: 5px 5px 0 0;
+  border-bottom: 1px solid $light-border-color;
+}
+
+.modal i {
+  position: absolute;
+  font-size: 1.5em;
+  right: 10px;
+  top: 10px;
+  color: $base-white-color;
+  z-index: 2;
+}
+
+.modal i:hover {
+  color: $bright-white;
+}
+
+.btn.post {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 200px;
+  height: 50px;
+  border: 0;
+  border-radius: 5px;
+  background-color: $action-color;
+  color: $bright-white;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 1.25rem;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn.post:hover,
+.btn.post:active {
+  background-color: $bright-action-color;
+  transform: $scale;
+}
+
+.twit-post-content {
+  display: block;
+  margin: 70px auto 0;
+  padding: 10px;
+  border-radius: 5px;
+  width: 90%;
+  height: 250px;
+  resize: none;
+}
+
+.twit-post-content:focus {
+  outline: none;
+  border: $bright-color;
 }

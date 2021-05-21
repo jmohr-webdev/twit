@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -29,7 +29,7 @@ const Login = ({ login, isAuthenticated }) => {
   }
 
   return (
-    <Fragment>
+    <>
       <form action="submit" className="login-form">
         <div className="input-field">
           <i className="fas fa-user"></i>
@@ -68,7 +68,7 @@ const Login = ({ login, isAuthenticated }) => {
       <p className="signup-text">
         Don't have an account yet? <Link to="/register">Register</Link>
       </p>
-    </Fragment>
+    </>
   );
 };
 

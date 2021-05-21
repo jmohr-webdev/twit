@@ -10,3 +10,6 @@ export const AUTH_ERROR = 'AUTH_ERROR';
 export const GET_ALL_TWITS = 'GET_ALL_TWITS';
 export const SET_LOADING = 'SET_LOADING';
 export const TWITS_ERROR = 'TWITS_ERROR';
+export const TOGGLE_MODAL = 'TOGGLE_MODAL';
+export const POST_TWIT = 'POST_TWIT';
+export const DELETE_TWIT = 'DELETE_TWIT';

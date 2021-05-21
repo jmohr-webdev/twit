@@ -18,7 +18,7 @@
 .input-field i {
   height: 50px;
   width: 50px;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.8);
   border-left: 1px solid rgba(255, 255, 255, 0.9);
   border-top: 1px solid rgba(255, 255, 255, 0.9);
   border-bottom: 1px solid rgba(255, 255, 255, 0.9);
@@ -42,7 +42,7 @@
   width: 100%;
   margin-bottom: 20px;
   border-radius: 0 5px 5px 0;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.9);
   outline: none;
   padding: 20px;
@@ -53,6 +53,25 @@
 .signup-form input:focus,
 .login-form input:focus {
   background-color: #fff;
+}
+
+.login-text,
+.signup-text {
+  color: #ccc;
+  font-size: 0.8 rem;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.login-text a,
+.signup-text a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.login-text a:hover,
+.signup-text a:hover {
+  text-decoration: underline;
 }
 
 .btn.signup,
@@ -75,25 +94,6 @@
 .btn.signup:hover {
   -webkit-transform: scale(1.02);
           transform: scale(1.02);
-}
-
-.login-text,
-.signup-text {
-  color: #ccc;
-  font-size: 0.8 rem;
-  text-align: center;
-  margin-bottom: 50px;
-}
-
-.login-text a,
-.signup-text a {
-  color: #fff;
-  text-decoration: none;
-}
-
-.login-text a:hover,
-.signup-text a:hover {
-  text-decoration: underline;
 }
 
 .navbar {
@@ -237,13 +237,89 @@
 }
 
 .modal {
-  position: static;
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   width: 80%;
   max-width: 800px;
-  height: 500px;
+  height: 400px;
   margin-top: 100px;
-  background-color: #ccc;
+  background-color: rgba(255, 255, 255, 0.8);
   border-radius: 5px;
+}
+
+.modal-title {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background-color: rgba(212, 30, 69, 0.85);
+  padding: 10px;
+  color: #ccc;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: 'Raleway', serif;
+  font-size: 1.5em;
+  font-weight: 800;
+  border-radius: 5px 5px 0 0;
+  border-bottom: 1px solid #ff798f;
+}
+
+.modal i {
+  position: absolute;
+  font-size: 1.5em;
+  right: 10px;
+  top: 10px;
+  color: #ccc;
+  z-index: 2;
+}
+
+.modal i:hover {
+  color: #fff;
+}
+
+.btn.post {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 200px;
+  height: 50px;
+  border: 0;
+  border-radius: 5px;
+  background-color: #008716;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 1.25rem;
+  outline: none;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn.post:hover,
+.btn.post:active {
+  background-color: #1ed442;
+  -webkit-transform: scale(1.02);
+          transform: scale(1.02);
+}
+
+.twit-post-content {
+  display: block;
+  margin: 70px auto 0;
+  padding: 10px;
+  border-radius: 5px;
+  width: 90%;
+  height: 250px;
+  resize: none;
+}
+
+.twit-post-content:focus {
+  outline: none;
+  border: #d41e45;
 }
 
 .twits-container {
@@ -266,7 +342,7 @@
 }
 
 .twit {
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.8);
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #fff;

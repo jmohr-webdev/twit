@@ -8,7 +8,7 @@ const asyncHandler = require('../middleware/async');
 // does not require authentication
 exports.getTwits = asyncHandler(async (req, res, next) => {
   try {
-    const twits = await Twit.find().sort({ createdDate: -1 }).limit(10);
+    let twits = await Twit.find().sort({ createdDate: -1 }).limit(10);
     if (!twits) {
       return res
         .status(204)
@@ -16,10 +16,10 @@ exports.getTwits = asyncHandler(async (req, res, next) => {
     }
 
     res.status(200).json({
-      msg: 'Twits found',
+      msg: 'Get all twits',
       count: twits.length,
-      success: true,
       twits,
+      success: true,
     });
   } catch (error) {
     res
@@ -91,9 +91,7 @@ exports.createATwit = asyncHandler(async (req, res, next) => {
 
     await Twit.create(newTwit);
 
-    res
-      .status(200)
-      .json({ msg: 'New twit created', success: true, data: newTwit });
+    res.status(200).json(newTwit);
   } catch (error) {
     res.status(500).json({
       msg: 'Something went wrong, no twit created',
