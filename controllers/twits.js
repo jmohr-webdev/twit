@@ -60,12 +60,38 @@ exports.getUserTwits = asyncHandler(async (req, res, next) => {
       return res.status(400).json({ msg: 'User not found', success: false });
     }
 
-    const twits = await Twit.find({ user: user._id });
+    const twits = await Twit.find({ user: user._id }).sort({ createdDate: -1 });
 
     res.status(200).json({
       msg: 'Twits found',
       count: twits.length,
       success: true,
+      twits,
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ msg: 'Server error', success: false, error: error.message });
+  }
+});
+
+// ************ GET ROUTE ************
+// Route: GET /api/v1/twits/following
+// Get a bunch of twits
+// Requires user to be logged in
+exports.getFollowingTwits = asyncHandler(async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user.id);
+
+    let following = user.following.map((follow) => follow.id);
+
+    const twits = await Twit.find({ user: { $in: following } })
+      .sort({ createdDate: -1 })
+      .limit(10);
+
+    res.status(200).json({
+      msg: `Get all twits from users ${user.username} is following`,
+      following: user.following,
       twits,
     });
   } catch (error) {

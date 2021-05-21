@@ -81,4 +81,6 @@ export const login =
   };
 
 // ************************************* LOGOUT ACTION *************************************
-export const logout = () => ({ type: LOGOUT });
+export const logout = () => (dispatch) => {
+  dispatch({ type: LOGOUT });
+};

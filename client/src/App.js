@@ -4,8 +4,9 @@ import Navbar from './components/layout/Navbar';
 import Toast from './components/layout/Toast';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
-import Home from './components/home/Home';
-import Profile from './components/profile/Profile';
+import Home from './components/pages/Home';
+import Following from './components/pages/Following';
+import Profile from './components/pages/profile/Profile';
 import setAuthToken from './utility/setAuthToken';
 import { loadUser } from './actions/auth';
 import { Provider } from 'react-redux';
@@ -32,6 +33,7 @@ function App() {
             <Switch>
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
+              <Route exact path="/following" component={Following} />
               <Route exact path="/:username" component={Profile} />
               <Route exact path="/" component={Home} />
             </Switch>

@@ -2,6 +2,7 @@ import axios from 'axios';
 import {
   GET_ALL_TWITS,
   GET_USER_TWITS,
+  GET_FOLLOWING_TWITS,
   DELETE_TWIT,
   POST_TWIT,
   TWITS_ERROR,
@@ -31,6 +32,22 @@ export const getUserTwits = (user) => async (dispatch) => {
     const res = await axios.get(`/api/v1/twits/${user}`);
 
     dispatch({ type: GET_USER_TWITS, payload: res.data.twits });
+  } catch (error) {
+    dispatch({
+      type: TWITS_ERROR,
+    });
+    dispatch(popupToast(error.response, 'failure'));
+  }
+};
+
+// ************************************* GET FOLLOWING TWITS  *************************************
+export const getFollowingTwits = () => async (dispatch) => {
+  try {
+    const res = await axios.get(`api/v1/twits/following`);
+
+    console.log(res);
+
+    dispatch({ type: GET_FOLLOWING_TWITS, payload: res.data.twits });
   } catch (error) {
     dispatch({
       type: TWITS_ERROR,

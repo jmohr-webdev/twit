@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getUserTwits } from '../../actions/twits';
+import { getFollowingTwits } from '../../actions/twits';
 import Twit from '../twits/Twit';
 
-const Profile = ({ match, getUserTwits, twits }) => {
+const Following = ({ getFollowingTwits, twits }) => {
   useEffect(() => {
-    getUserTwits(match.params.username);
-  }, [getUserTwits]);
+    getFollowingTwits();
+  }, [getFollowingTwits]);
 
   return twits ? (
     <>
@@ -19,13 +19,13 @@ const Profile = ({ match, getUserTwits, twits }) => {
     </>
   ) : (
     <div>
-      <h1>No twits</h1>
+      <h1>Not following anyone</h1>
     </div>
   );
 };
 
-Profile.propTypes = {
-  getUserTwits: PropTypes.func.isRequired,
+Following.propTypes = {
+  getFollowingTwits: PropTypes.func.isRequired,
   twits: PropTypes.array,
 };
 
@@ -33,4 +33,4 @@ const mapStateToProps = (state) => ({
   twits: state.twits.twits,
 });
 
-export default connect(mapStateToProps, { getUserTwits })(Profile);
+export default connect(mapStateToProps, { getFollowingTwits })(Following);

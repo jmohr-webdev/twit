@@ -8,10 +8,14 @@ const {
   getSingleTwit,
   createATwit,
   deleteATwit,
+  getFollowingTwits,
 } = require('../controllers/twits');
 
 // Route: /api/v1/twits/
 router.route('/').get(getTwits);
+
+// Route: /api/v1/twits/following
+router.route('/following').get(loggedIn, getFollowingTwits);
 
 // Route: /api/v1/twits/post
 router.route('/post').post(loggedIn, createATwit);

@@ -4,6 +4,7 @@ import {
   POST_TWIT,
   DELETE_TWIT,
   TWITS_ERROR,
+  GET_FOLLOWING_TWITS,
 } from '../actions/types';
 
 const initialState = {
@@ -17,6 +18,7 @@ function twitReducer(state = initialState, action) {
   switch (type) {
     case GET_ALL_TWITS:
     case GET_USER_TWITS:
+    case GET_FOLLOWING_TWITS:
       return {
         ...state,
         twits: payload,
