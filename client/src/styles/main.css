@@ -346,8 +346,13 @@
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #fff;
-  margin-bottom: 20px;
   width: 100%;
+  margin-bottom: 25px;
+}
+
+.flat-bottom {
+  border-radius: 5px 5px 0 0;
+  margin-bottom: 0px;
 }
 
 .twit-content {
@@ -383,6 +388,26 @@
 .twit-date {
   display: block;
   margin-top: 20px;
+}
+
+.delete-bar {
+  width: 100%;
+  text-align: right;
+  background-color: #542d51;
+  font-size: 1.5em;
+  padding: 10px 20px;
+  margin-bottom: 25px;
+  border-radius: 0 0 5px 5px;
+}
+
+.delete-bar i {
+  position: relative;
+  color: #ccc;
+  font-size: 1em;
+}
+
+.delete-bar i:hover {
+  color: #fff;
 }
 
 /* ******************* MEDIA QUERIES ******************* */
