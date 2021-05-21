@@ -1,5 +1,11 @@
 import axios from 'axios';
-import { GET_ALL_TWITS, GET_USER_TWITS, POST_TWIT, TWITS_ERROR } from './types';
+import {
+  GET_ALL_TWITS,
+  GET_USER_TWITS,
+  DELETE_TWIT,
+  POST_TWIT,
+  TWITS_ERROR,
+} from './types';
 import { popupToast } from '../actions/toast';
 
 // ************************************* GET TWITS FROM EVERYONE  *************************************
@@ -35,8 +41,6 @@ export const getUserTwits = (user) => async (dispatch) => {
 
 // ************************************* POST A TWIT *************************************
 export const postTwit = (content) => async (dispatch) => {
-  console.log(content);
-  console.log('calling post twit');
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -60,4 +64,21 @@ export const postTwit = (content) => async (dispatch) => {
   }
 };
 
-// ************************************* SET LOADING *************************************
+// ************************************* DELETE A TWIT *************************************
+export const deleteTwit = (username, twitId) => async (dispatch) => {
+  try {
+    await axios.delete(`/api/v1/twits/${username}/${twitId}`);
+
+    dispatch({ type: DELETE_TWIT, payload: twitId });
+    dispatch(popupToast('Twit deleted', 'success'));
+  } catch (error) {
+    dispatch({
+      type: TWITS_ERROR,
+      payload: {
+        msg: error.response.data.msg,
+        status: error.response.status,
+      },
+    });
+    dispatch(popupToast(error.response.data.msg, 'failure'));
+  }
+};

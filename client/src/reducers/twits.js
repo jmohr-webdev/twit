@@ -2,6 +2,7 @@ import {
   GET_ALL_TWITS,
   GET_USER_TWITS,
   POST_TWIT,
+  DELETE_TWIT,
   TWITS_ERROR,
 } from '../actions/types';
 
@@ -23,8 +24,13 @@ function twitReducer(state = initialState, action) {
       };
     case POST_TWIT:
       return { ...state, twits: [payload, ...state.twits], loading: false };
+    case DELETE_TWIT:
+      return {
+        ...state,
+        twits: state.twits.filter((twit) => twit._id !== payload),
+        loading: false,
+      };
     case TWITS_ERROR:
-      console.log('There was an error getting the twits');
       return state;
     default:
       return state;

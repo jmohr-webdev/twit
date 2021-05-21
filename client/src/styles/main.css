@@ -115,6 +115,7 @@
   text-align: center;
   text-transform: uppercase;
   margin-bottom: 100px;
+  z-index: 10;
 }
 
 .brand {
@@ -147,7 +148,7 @@
 }
 
 .toast {
-  position: absolute;
+  position: fixed;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -239,7 +240,7 @@
 }
 
 .modal {
-  position: absolute;
+  position: fixed;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
