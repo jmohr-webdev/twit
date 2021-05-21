@@ -66,7 +66,7 @@ exports.getUserTwits = asyncHandler(async (req, res, next) => {
       msg: 'Twits found',
       count: twits.length,
       success: true,
-      data: twits,
+      twits,
     });
   } catch (error) {
     res

@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { GET_ALL_TWITS, POST_TWIT, TWITS_ERROR } from './types';
+import { GET_ALL_TWITS, GET_USER_TWITS, POST_TWIT, TWITS_ERROR } from './types';
 import { popupToast } from '../actions/toast';
 
-// ************************************* GET TWITS *************************************
+// ************************************* GET TWITS FROM EVERYONE  *************************************
 export const getAllTwits = () => async (dispatch) => {
   try {
     const res = await axios.get('/api/v1/twits');
@@ -12,7 +12,20 @@ export const getAllTwits = () => async (dispatch) => {
       payload: res.data.twits,
     });
   } catch (error) {
-    console.log(error);
+    dispatch({
+      type: TWITS_ERROR,
+    });
+    dispatch(popupToast(error.response, 'failure'));
+  }
+};
+
+// ************************************* GET A USERS TWITS *************************************
+export const getUserTwits = (user) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/v1/twits/${user}`);
+
+    dispatch({ type: GET_USER_TWITS, payload: res.data.twits });
+  } catch (error) {
     dispatch({
       type: TWITS_ERROR,
     });
@@ -43,7 +56,6 @@ export const postTwit = (content) => async (dispatch) => {
         status: error.response.status,
       },
     });
-    console.error(error);
     dispatch(popupToast(error.response.data.msg, 'failure'));
   }
 };

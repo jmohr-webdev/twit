@@ -1,4 +1,9 @@
-import { GET_ALL_TWITS, POST_TWIT, TWITS_ERROR } from '../actions/types';
+import {
+  GET_ALL_TWITS,
+  GET_USER_TWITS,
+  POST_TWIT,
+  TWITS_ERROR,
+} from '../actions/types';
 
 const initialState = {
   twits: [],
@@ -10,6 +15,7 @@ function twitReducer(state = initialState, action) {
 
   switch (type) {
     case GET_ALL_TWITS:
+    case GET_USER_TWITS:
       return {
         ...state,
         twits: payload,

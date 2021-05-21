@@ -7,13 +7,13 @@ const Navbar = ({ auth: { isAuthenticated, user } }) => {
   const loggedInLinks = (
     <ul className="nav nav-links">
       <li>
-        <Link to="/twits">
+        <Link to="/">
           <span className="nav-link">Home</span>
         </Link>
       </li>
       <li>
-        <Link to="/dash">
-          <span className="nav-link">{user && user.username}</span>}
+        <Link to={`${user ? user.username : '/'}`}>
+          <span className="nav-link">Profile</span>}
         </Link>
       </li>
       <li>
@@ -41,7 +41,7 @@ const Navbar = ({ auth: { isAuthenticated, user } }) => {
 
   return (
     <header className="navbar navbar-auth">
-      <Link to="/twits">
+      <Link to="/">
         <span className="brand">Twit</span>
       </Link>
       <Fragment>{isAuthenticated ? loggedInLinks : guestLinks}</Fragment>

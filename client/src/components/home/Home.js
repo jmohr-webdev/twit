@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getAllTwits } from '../../actions/twits';
-import Moment from 'moment';
 import ModalButton from '../layout/ModalButton';
 import Modal from '../layout/Modal';
+import Twit from '../twits/Twit';
 
-const Home = ({ getAllTwits, twits, modalOpen, user }) => {
+const Home = ({ getAllTwits, twits, modalOpen }) => {
   useEffect(() => {
     getAllTwits();
   }, [getAllTwits]);
@@ -15,33 +14,9 @@ const Home = ({ getAllTwits, twits, modalOpen, user }) => {
   return twits ? (
     <>
       <div className="twits-container">
-        {twits.map((twit) => {
-          const currentUser = user && twit.username === user.username;
-          return (
-            <>
-              <div
-                key={twit._id}
-                className={`twit ${currentUser ? 'flat-bottom' : ''} `}
-              >
-                <Link to={`/${twit.username}`}>
-                  <div className="author-container">
-                    <i className="fas fa-user-circle fa-3x"></i>
-                    <div className="twit-author">{twit.username}</div>
-                  </div>
-                </Link>
-                <p className="twit-content">{twit.content}</p>
-                <div className="twit-date">
-                  {Moment(twit.createdDate).format('MMM Do YYYY, h:mm:ss a')}
-                </div>
-              </div>
-              {user && user.username === twit.username && (
-                <div class="delete-bar">
-                  <i className="fas fa-trash-alt"></i>
-                </div>
-              )}
-            </>
-          );
-        })}
+        {twits.map((twit) => (
+          <Twit twit={twit} key={twit._id} />
+        ))}
       </div>
       <ModalButton />
       {modalOpen && <Modal />}
@@ -62,7 +37,6 @@ Home.propTypes = {
 const mapStateToProps = (state) => ({
   twits: state.twits.twits,
   modalOpen: state.modal.modalOpen,
-  user: state.auth.user,
 });
 
 export default connect(mapStateToProps, { getAllTwits })(Home);

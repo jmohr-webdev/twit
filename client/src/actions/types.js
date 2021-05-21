@@ -8,6 +8,7 @@ export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_FAIL = 'REGISTER_FAIL';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const GET_ALL_TWITS = 'GET_ALL_TWITS';
+export const GET_USER_TWITS = 'GET_USER_TWITS';
 export const SET_LOADING = 'SET_LOADING';
 export const TWITS_ERROR = 'TWITS_ERROR';
 export const TOGGLE_MODAL = 'TOGGLE_MODAL';

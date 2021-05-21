@@ -3,6 +3,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 4px solid $bright-action-color;
+  outline: none;
   background-color: $action-color;
   height: 50px;
   width: 50px;
