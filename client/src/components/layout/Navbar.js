@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
 
@@ -8,24 +8,34 @@ const Navbar = ({ auth: { isAuthenticated, user }, logout }) => {
   const loggedInLinks = (
     <ul className="nav nav-links">
       <li>
-        <Link to="/">
-          <span className="nav-link">Home</span>
-        </Link>
+        <NavLink
+          exact
+          to="/"
+          activeStyle={{ fontWeight: '600', color: '#fff' }}
+        >
+          Home
+        </NavLink>
       </li>
       <li>
-        <Link to="/following">
-          <span className="nav-link">Following</span>}
-        </Link>
+        <NavLink
+          to="/following"
+          activeStyle={{ fontWeight: '600', color: '#fff' }}
+        >
+          Following
+        </NavLink>
       </li>
       <li>
-        <Link to={`${user ? user.username : '/'}`}>
-          <span className="nav-link">Profile</span>}
-        </Link>
+        <NavLink
+          to={`${user ? user.username : '/'}`}
+          activeStyle={{ fontWeight: '600', color: '#fff' }}
+        >
+          Profile
+        </NavLink>
       </li>
       <li>
-        <Link onClick={logout} to="/login">
-          <span className="nav-link">Log Out</span>
-        </Link>
+        <NavLink onClick={logout} to="/login">
+          Log Out
+        </NavLink>
       </li>
     </ul>
   );
@@ -33,14 +43,17 @@ const Navbar = ({ auth: { isAuthenticated, user }, logout }) => {
   const guestLinks = (
     <ul className="nav nav-links">
       <li>
-        <Link to="/register">
-          <span className="nav-link">Register</span>
-        </Link>
+        <NavLink
+          to="/register"
+          activeStyle={{ fontWeight: '600', color: '#fff' }}
+        >
+          Register
+        </NavLink>
       </li>
       <li>
-        <Link to="/login">
-          <span className="nav-link">Log In</span>
-        </Link>
+        <NavLink to="/login" activeStyle={{ fontWeight: '600', color: '#fff' }}>
+          Log In
+        </NavLink>
       </li>
     </ul>
   );

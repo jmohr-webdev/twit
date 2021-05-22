@@ -55,11 +55,12 @@
 
 .login-text a,
 .signup-text a {
-  color: $bright-white;
+  color: $base-white-color;
   text-decoration: none;
 }
 
 .login-text a:hover,
 .signup-text a:hover {
+  color: $bright-white;
   text-decoration: underline;
 }

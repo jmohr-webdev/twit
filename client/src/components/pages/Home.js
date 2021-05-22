@@ -6,7 +6,7 @@ import ModalButton from '../layout/ModalButton';
 import Modal from '../layout/Modal';
 import Twit from '../twits/Twit';
 
-const Home = ({ getAllTwits, twits, modalOpen }) => {
+const Home = ({ getAllTwits, twits, modalOpen, isAuthenticated }) => {
   useEffect(() => {
     getAllTwits();
   }, [getAllTwits]);
@@ -18,8 +18,12 @@ const Home = ({ getAllTwits, twits, modalOpen }) => {
           <Twit twit={twit} key={twit._id} />
         ))}
       </div>
-      <ModalButton />
-      {modalOpen && <Modal />}
+      {isAuthenticated && (
+        <>
+          <ModalButton />
+          {modalOpen && <Modal />}
+        </>
+      )}
     </>
   ) : (
     <div>
@@ -32,11 +36,14 @@ Home.propTypes = {
   getAllTwits: PropTypes.func.isRequired,
   twits: PropTypes.array.isRequired,
   user: PropTypes.object,
+  modalOpen: PropTypes.bool.isRequired,
+  isAuthenticated: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
   twits: state.twits.twits,
   modalOpen: state.modal.modalOpen,
+  isAuthenticated: state.auth.isAuthenticated,
 });
 
 export default connect(mapStateToProps, { getAllTwits })(Home);

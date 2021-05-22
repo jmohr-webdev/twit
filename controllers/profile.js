@@ -9,7 +9,11 @@ const asyncHandler = require('../middleware/async');
 exports.getProfile = asyncHandler(async (req, res, next) => {
   try {
     const user = await User.findOne({ username: req.params.username }).populate(
-      { path: 'twits', select: 'content' }
+      {
+        path: 'twits',
+        options: { sort: { createdDate: -1 } },
+        select: 'content username',
+      }
     );
 
     const twits = user.twits;
@@ -26,7 +30,7 @@ exports.getProfile = asyncHandler(async (req, res, next) => {
     res.status(200).json({
       msg: `Found profile of ${req.params.username}`,
       success: true,
-      data: profile,
+      profile,
       numberOfTwits: twits.length,
       twits,
     });

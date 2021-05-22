@@ -47,7 +47,7 @@ exports.registerUser = asyncHandler(async (req, res, next) => {
 
     newUser = await User.create(newUser);
 
-    await Profile.create({ user: newUser._id });
+    await Profile.create({ user: newUser._id, username: newUser.username });
 
     const payload = {
       user: {

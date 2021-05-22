@@ -1,36 +1,44 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getUserTwits } from '../../../actions/twits';
+import { getProfile } from '../../../actions/profile';
+import ProfileHead from './ProfileHead';
 import Twit from '../../twits/Twit';
 
-const Profile = ({ match, getUserTwits, twits }) => {
+const Profile = ({ match, getProfile, twits, profile }) => {
   useEffect(() => {
-    getUserTwits(match.params.username);
-  }, [getUserTwits]);
+    getProfile(match.params.username);
+  }, [getProfile]);
 
-  return twits ? (
+  return (
     <>
-      <div className="twits-container">
-        {twits.map((twit) => (
-          <Twit twit={twit} key={twit._id} />
-        ))}
-      </div>
+      <ProfileHead profile={profile} username={match.params.username} />
+
+      {twits ? (
+        <>
+          <div className="twits-container">
+            {twits.map((twit) => (
+              <Twit twit={twit} key={twit._id} />
+            ))}
+          </div>
+        </>
+      ) : (
+        <div>
+          <h1>No twits</h1>
+        </div>
+      )}
     </>
-  ) : (
-    <div>
-      <h1>No twits</h1>
-    </div>
   );
 };
 
 Profile.propTypes = {
-  getUserTwits: PropTypes.func.isRequired,
+  getProfile: PropTypes.func.isRequired,
   twits: PropTypes.array,
 };
 
 const mapStateToProps = (state) => ({
   twits: state.twits.twits,
+  profile: state.profile.profile,
 });
 
-export default connect(mapStateToProps, { getUserTwits })(Profile);
+export default connect(mapStateToProps, { getProfile })(Profile);

@@ -29,46 +29,48 @@ const Login = ({ login, isAuthenticated }) => {
   }
 
   return (
-    <>
-      <form action="submit" className="login-form">
-        <div className="input-field">
-          <i className="fas fa-user"></i>
-          <input
-            type="text"
-            name="usernameOrEmail"
-            id="login-usernameOrEmail"
-            minLength="6"
-            placeholder="Username or Email"
-            value={usernameOrEmail}
-            onChange={(e) => handleChange(e)}
-          />
-        </div>
+    <div className="container auth">
+      <div className="overlay">
+        <form action="submit" className="login-form">
+          <div className="input-field">
+            <i className="fas fa-user"></i>
+            <input
+              type="text"
+              name="usernameOrEmail"
+              id="login-usernameOrEmail"
+              minLength="6"
+              placeholder="Username or Email"
+              value={usernameOrEmail}
+              onChange={(e) => handleChange(e)}
+            />
+          </div>
 
-        <div className="input-field">
-          <i className="fas fa-lock"></i>
-          <input
-            type="password"
-            name="password"
-            id="login-password"
-            maxLength="30"
-            minLength="6"
-            placeholder="Enter password"
-            value={password}
-            onChange={(e) => handleChange(e)}
-          />
-        </div>
-        <button
-          type="submit"
-          className="btn login"
-          onClick={(e) => handleSubmit(e)}
-        >
-          Login
-        </button>
-      </form>
-      <p className="signup-text">
-        Don't have an account yet? <Link to="/register">Register</Link>
-      </p>
-    </>
+          <div className="input-field">
+            <i className="fas fa-lock"></i>
+            <input
+              type="password"
+              name="password"
+              id="login-password"
+              maxLength="30"
+              minLength="6"
+              placeholder="Enter password"
+              value={password}
+              onChange={(e) => handleChange(e)}
+            />
+          </div>
+          <button
+            type="submit"
+            className="btn login"
+            onClick={(e) => handleSubmit(e)}
+          >
+            Login
+          </button>
+        </form>
+        <p className="signup-text">
+          Don't have an account yet? <Link to="/register">Register</Link>
+        </p>
+      </div>
+    </div>
   );
 };
 

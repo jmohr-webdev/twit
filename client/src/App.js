@@ -11,7 +11,6 @@ import setAuthToken from './utility/setAuthToken';
 import { loadUser } from './actions/auth';
 import { Provider } from 'react-redux';
 import store from './store';
-// import './App.css';
 import './styles/main.css';
 
 if (localStorage.token) {

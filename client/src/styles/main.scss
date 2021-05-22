@@ -8,6 +8,7 @@
 @import './components/layout/toast';
 @import './components/layout/modalbutton';
 @import './components//layout/modal';
+@import './components/profile/profilehead';
 @import './components/twit';
 @import './media_queries/mediaqueries';
 
@@ -32,8 +33,13 @@ a {
   min-height: 100vh;
   width: 100%;
   background: $bright-color;
+}
+
+.container.auth {
+  height: 100vh;
   background: url('../img/photo-1523731407965-2430cd12f5e4.jpg');
   background-size: cover;
+  overflow: hidden;
 }
 
 .overlay {
@@ -43,6 +49,7 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   border-bottom: 3px solid $light-border-color;
 }
 
