@@ -3,12 +3,21 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getProfile } from '../../../actions/profile';
 import ProfileHead from './ProfileHead';
+import ModalPostButton from '../../layout/ModalPostButton';
+import Modal from '../../layout/Modal';
 import Twit from '../../twits/Twit';
 
-const Profile = ({ match, getProfile, twits, profile }) => {
+const Profile = ({
+  match,
+  getProfile,
+  twits,
+  profile,
+  isAuthenticated,
+  modalOpen,
+}) => {
   useEffect(() => {
     getProfile(match.params.username);
-  }, [getProfile]);
+  }, [getProfile, match.params.username]);
 
   return (
     <>
@@ -27,6 +36,13 @@ const Profile = ({ match, getProfile, twits, profile }) => {
           <h1>No twits</h1>
         </div>
       )}
+
+      {isAuthenticated && (
+        <>
+          <ModalPostButton />
+          {modalOpen && <Modal />}
+        </>
+      )}
     </>
   );
 };
@@ -39,6 +55,8 @@ Profile.propTypes = {
 const mapStateToProps = (state) => ({
   twits: state.twits.twits,
   profile: state.profile.profile,
+  modalOpen: state.modal.modalOpen,
+  isAuthenticated: state.auth.isAuthenticated,
 });
 
 export default connect(mapStateToProps, { getProfile })(Profile);

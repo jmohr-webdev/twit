@@ -349,7 +349,7 @@
   margin-top: 50px;
   width: 100%;
   color: #fff;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #1b1521;
 }
 
 .profile-container {
@@ -390,14 +390,15 @@
   margin-bottom: 20px;
 }
 
-.btn-follow {
+.btn-follow,
+.btn-edit,
+.btn-unfollow {
   margin-top: 20px;
   width: 200px;
   padding: 10px;
   border: 0;
   border-radius: 5px;
   outline: 0;
-  background-color: #008716;
   color: #fff;
   font-weight: 600;
   text-transform: uppercase;
@@ -405,10 +406,26 @@
   transition: all 0.3s ease-in;
 }
 
-.btn-follow:hover {
+.btn-follow,
+.btn-edit {
+  background-color: #008716;
+}
+
+.btn-unfollow {
+  background-color: #542d51;
+}
+
+.btn-follow:hover,
+.btn-edit:hover {
   -webkit-transform: scale(1.02);
           transform: scale(1.02);
   background-color: #1ed442;
+}
+
+.btn-unfollow:hover {
+  -webkit-transform: scale(1.02);
+          transform: scale(1.02);
+  background-color: ligthten(#542d51, 90%);
 }
 
 .twits-container {

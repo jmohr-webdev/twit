@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getAllTwits } from '../../actions/twits';
-import ModalButton from '../layout/ModalButton';
+import ModalPostButton from '../layout/ModalPostButton';
 import Modal from '../layout/Modal';
 import Twit from '../twits/Twit';
 
@@ -20,7 +20,7 @@ const Home = ({ getAllTwits, twits, modalOpen, isAuthenticated }) => {
       </div>
       {isAuthenticated && (
         <>
-          <ModalButton />
+          <ModalPostButton />
           {modalOpen && <Modal />}
         </>
       )}

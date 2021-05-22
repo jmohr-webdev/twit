@@ -9,7 +9,7 @@
   margin-top: 50px;
   width: 100%;
   color: $bright-white;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid $base-dark-color;
 }
 
 .profile-container {
@@ -45,21 +45,37 @@
   margin-bottom: 20px;
 }
 
-.btn-follow {
+.btn-follow,
+.btn-edit,
+.btn-unfollow {
   margin-top: 20px;
   width: 200px;
   padding: 10px;
   border: 0;
   border-radius: 5px;
   outline: 0;
-  background-color: $action-color;
   color: $bright-white;
   font-weight: 600;
   text-transform: uppercase;
   transition: $transition;
 }
 
-.btn-follow:hover {
+.btn-follow,
+.btn-edit {
+  background-color: $action-color;
+}
+
+.btn-unfollow {
+  background-color: $danger-color;
+}
+
+.btn-follow:hover,
+.btn-edit:hover {
   transform: $scale;
   background-color: $bright-action-color;
+}
+
+.btn-unfollow:hover {
+  transform: $scale;
+  background-color: ligthten($danger-color, 90%);
 }

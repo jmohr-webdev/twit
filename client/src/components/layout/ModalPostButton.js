@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { toggleModal } from '../../actions/modal';
 import { connect } from 'react-redux';
 
-const ModalButton = ({ toggleModal }) => {
+const ModalPostButton = ({ toggleModal }) => {
   const handleClick = () => {
     toggleModal();
   };
@@ -17,8 +17,8 @@ const ModalButton = ({ toggleModal }) => {
   );
 };
 
-ModalButton.propTypes = {
+ModalPostButton.propTypes = {
   toggleModal: PropTypes.func.isRequired,
 };
 
-export default connect(null, { toggleModal })(ModalButton);
+export default connect(null, { toggleModal })(ModalPostButton);

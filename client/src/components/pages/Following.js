@@ -2,9 +2,16 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getFollowingTwits } from '../../actions/twits';
+import ModalPostButton from '../layout/ModalPostButton';
+import Modal from '../layout/Modal';
 import Twit from '../twits/Twit';
 
-const Following = ({ getFollowingTwits, twits }) => {
+const Following = ({
+  getFollowingTwits,
+  twits,
+  modalOpen,
+  isAuthenticated,
+}) => {
   useEffect(() => {
     getFollowingTwits();
   }, [getFollowingTwits]);
@@ -16,6 +23,12 @@ const Following = ({ getFollowingTwits, twits }) => {
           <Twit twit={twit} key={twit._id} />
         ))}
       </div>
+      {isAuthenticated && (
+        <>
+          <ModalPostButton />
+          {modalOpen && <Modal />}
+        </>
+      )}
     </>
   ) : (
     <div>
@@ -27,10 +40,14 @@ const Following = ({ getFollowingTwits, twits }) => {
 Following.propTypes = {
   getFollowingTwits: PropTypes.func.isRequired,
   twits: PropTypes.array,
+  modalOpen: PropTypes.bool.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   twits: state.twits.twits,
+  modalOpen: state.modal.modalOpen,
+  isAuthenticated: state.auth.isAuthenticated,
 });
 
 export default connect(mapStateToProps, { getFollowingTwits })(Following);

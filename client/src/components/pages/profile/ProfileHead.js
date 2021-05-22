@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import ProfileButton from './ProfileButton';
 
-const ProfileHead = ({ profile, user }) => {
+const ProfileHead = ({ profile, isAuthenticated }) => {
   const { username, bio, location, name } = profile;
 
   return (
@@ -24,9 +25,7 @@ const ProfileHead = ({ profile, user }) => {
               Location: {location ? location : 'No location given'}{' '}
             </p>
           </div>
-          {user && user.isAuthenticated && (
-            <button className="btn btn-follow">Follow</button>
-          )}
+          {isAuthenticated && <ProfileButton profile={profile} />}
         </div>
       </div>
     </div>
@@ -35,11 +34,11 @@ const ProfileHead = ({ profile, user }) => {
 
 ProfileHead.propTypes = {
   profile: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
+  isAuthenticated: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
-  user: state.auth.user,
+  isAuthenticated: state.auth.isAuthenticated,
 });
 
 export default connect(mapStateToProps, null)(ProfileHead);

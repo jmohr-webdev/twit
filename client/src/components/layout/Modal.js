@@ -48,8 +48,4 @@ Modal.propTypes = {
   postTwit: PropTypes.func.isRequired,
 };
 
-// const mapStateToProps = (state) => ({
-//   username: state.user.username,
-// });
-
 export default connect(null, { toggleModal, postTwit })(Modal);
