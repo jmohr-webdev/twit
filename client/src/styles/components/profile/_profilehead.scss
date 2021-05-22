@@ -1,6 +1,65 @@
 .profile-head {
-  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  padding: 10px 0;
   background-color: $dark-overlay;
+  font-size: 1.5em;
+  margin-top: 50px;
   width: 100%;
   color: $bright-white;
+  border-bottom: 1px solid black;
+}
+
+.profile-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  max-width: 800px;
+  padding-bottom: 20px;
+}
+
+.avatar-container i {
+  color: $bright-white;
+}
+
+.details-container {
+  margin-left: 50px;
+  color: $base-white-color;
+}
+
+.details-container h1 {
+  font-family: 'Raleway', serif;
+  font-size: 1.75em;
+  color: $bright-white;
+}
+
+.details-container p {
+  color: $base-white-color;
+  font-size: 1em;
+}
+
+.details-name {
+  margin-bottom: 20px;
+}
+
+.btn-follow {
+  margin-top: 20px;
+  width: 200px;
+  padding: 10px;
+  border: 0;
+  border-radius: 5px;
+  outline: 0;
+  background-color: $action-color;
+  color: $bright-white;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: $transition;
+}
+
+.btn-follow:hover {
+  transform: $scale;
+  background-color: $bright-action-color;
 }

@@ -15,7 +15,7 @@ const TwitSchema = new mongoose.Schema({
   },
   createdDate: {
     type: Date,
-    default: Date.now(),
+    default: Date.now,
   },
   username: {
     type: String,

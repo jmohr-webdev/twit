@@ -12,7 +12,6 @@ exports.getProfile = asyncHandler(async (req, res, next) => {
       {
         path: 'twits',
         options: { sort: { createdDate: -1 } },
-        select: 'content username',
       }
     );
 

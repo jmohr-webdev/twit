@@ -65,13 +65,12 @@
 
 .login-text a,
 .signup-text a {
-  color: #ccc;
+  color: #fff;
   text-decoration: none;
 }
 
 .login-text a:hover,
 .signup-text a:hover {
-  color: #fff;
   text-decoration: underline;
 }
 
@@ -334,34 +333,97 @@
 }
 
 .profile-head {
-  min-height: 300px;
-  background-color: rgba(0, 0, 0, 0.8);
-  width: 100%;
-  color: #fff;
-}
-
-.twits-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  min-height: 200px;
+  padding: 10px 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  font-size: 1.5em;
+  margin-top: 50px;
+  width: 100%;
+  color: #fff;
+  border-bottom: 1px solid black;
+}
+
+.profile-container {
+  margin-top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 80%;
+  max-width: 800px;
+  padding-bottom: 20px;
+}
+
+.avatar-container i {
+  color: #fff;
+}
+
+.details-container {
+  margin-left: 50px;
+  color: #ccc;
+}
+
+.details-container h1 {
+  font-family: 'Raleway', serif;
+  font-size: 1.75em;
+  color: #fff;
+}
+
+.details-container p {
+  color: #ccc;
+  font-size: 1em;
+}
+
+.details-name {
+  margin-bottom: 20px;
+}
+
+.btn-follow {
+  margin-top: 20px;
+  width: 200px;
+  padding: 10px;
+  border: 0;
+  border-radius: 5px;
+  outline: 0;
+  background-color: #008716;
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  -webkit-transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in;
+}
+
+.btn-follow:hover {
+  -webkit-transform: scale(1.02);
+          transform: scale(1.02);
+  background-color: #1ed442;
+}
+
+.twits-container {
   margin-top: 100px;
   width: 80%;
   max-width: 800px;
 }
 
+.twits-container.profile {
+  margin-top: 50px;
+}
+
 .twit {
   background-color: rgba(255, 255, 255, 0.8);
-  padding: 10px;
+  padding: 10px 20px;
   border-radius: 5px;
   border: 1px solid #fff;
   width: 100%;
@@ -377,6 +439,7 @@
   margin-top: 10px;
   font-size: 1.15em;
   text-justify: inter-word;
+  line-height: 1.4em;
 }
 
 .author-container {
@@ -508,10 +571,13 @@ a {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.overlay.auth {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  border-bottom: 3px solid #ff798f;
+  overflow: hidden;
 }
 
 .hide-on-small {

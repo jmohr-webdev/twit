@@ -30,7 +30,7 @@ const Login = ({ login, isAuthenticated }) => {
 
   return (
     <div className="container auth">
-      <div className="overlay">
+      <div className="overlay auth">
         <form action="submit" className="login-form">
           <div className="input-field">
             <i className="fas fa-user"></i>

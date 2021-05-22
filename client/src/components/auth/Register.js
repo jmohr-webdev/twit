@@ -31,7 +31,7 @@ const Register = ({ register, isAuthenticated }) => {
 
   return (
     <div className="container auth">
-      <div className="overlay">
+      <div className="overlay auth">
         <form action="submit" className="signup-form">
           <div className="input-field">
             <i className="fas fa-user"></i>

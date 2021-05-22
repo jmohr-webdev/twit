@@ -12,11 +12,11 @@ const Profile = ({ match, getProfile, twits, profile }) => {
 
   return (
     <>
-      <ProfileHead profile={profile} username={match.params.username} />
+      <ProfileHead profile={profile} />
 
       {twits ? (
         <>
-          <div className="twits-container">
+          <div className="twits-container profile">
             {twits.map((twit) => (
               <Twit twit={twit} key={twit._id} />
             ))}

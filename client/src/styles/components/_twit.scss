@@ -1,16 +1,16 @@
 .twits-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   margin-top: 100px;
   width: 80%;
   max-width: 800px;
+
+  &.profile {
+    margin-top: 50px;
+  }
 }
 
 .twit {
   background-color: $frosted-color;
-  padding: 10px;
+  padding: 10px 20px;
   border-radius: 5px;
   border: 1px solid $bright-white;
   width: 100%;
@@ -26,6 +26,7 @@
   margin-top: 10px;
   font-size: 1.15em;
   text-justify: inter-word;
+  line-height: 1.4em;
 }
 
 .author-container {
