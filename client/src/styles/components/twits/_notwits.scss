@@ -1,0 +1,17 @@
+.no-twits-container {
+  width: 80%;
+  max-width: 800px;
+  min-height: 200px;
+  margin-top: 100px;
+  background-color: $frosted-color;
+  border-radius: 5px;
+  border: 1px solid $bright-white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.no-twits-content {
+  font-size: 2em;
+  font-family: 'Raleway', serif;
+}

@@ -17,7 +17,7 @@ const ProfileHead = ({ profile, isAuthenticated }) => {
             <h1>{name ? name : username}</h1>
             <p className="details-username">@{username}</p>
           </div>
-          <div className="details-backgrosund">
+          <div className="details-background">
             <p className="details-bio">
               Bio: {bio ? bio : 'No biography given'}{' '}
             </p>

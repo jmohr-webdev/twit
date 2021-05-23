@@ -70,12 +70,15 @@
 }
 
 .btn-follow:hover,
-.btn-edit:hover {
+.btn-follow:active,
+.btn-edit:hover,
+.btn-edit:active {
   transform: $scale;
   background-color: $bright-action-color;
 }
 
-.btn-unfollow:hover {
+.btn-unfollow:hover,
+.btn-unfollow:active {
   transform: $scale;
-  background-color: ligthten($danger-color, 90%);
+  background-color: adjust-color($danger-color, $saturation: 5, $lightness: 20);
 }

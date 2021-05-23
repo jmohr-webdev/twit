@@ -416,16 +416,19 @@
 }
 
 .btn-follow:hover,
-.btn-edit:hover {
+.btn-follow:active,
+.btn-edit:hover,
+.btn-edit:active {
   -webkit-transform: scale(1.02);
           transform: scale(1.02);
   background-color: #1ed442;
 }
 
-.btn-unfollow:hover {
+.btn-unfollow:hover,
+.btn-unfollow:active {
   -webkit-transform: scale(1.02);
           transform: scale(1.02);
-  background-color: ligthten(#542d51, 90%);
+  background-color: #9c4b96;
 }
 
 .twits-container {
@@ -506,6 +509,30 @@
 
 .delete-bar i:hover {
   color: #fff;
+}
+
+.no-twits-container {
+  width: 80%;
+  max-width: 800px;
+  min-height: 200px;
+  margin-top: 100px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  border: 1px solid #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.no-twits-content {
+  font-size: 2em;
+  font-family: 'Raleway', serif;
 }
 
 /* ******************* MEDIA QUERIES ******************* */

@@ -45,8 +45,6 @@ export const getFollowingTwits = () => async (dispatch) => {
   try {
     const res = await axios.get(`api/v1/twits/following`);
 
-    console.log(res);
-
     dispatch({ type: GET_FOLLOWING_TWITS, payload: res.data.twits });
   } catch (error) {
     dispatch({

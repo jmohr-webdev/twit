@@ -5,6 +5,7 @@ import { getFollowingTwits } from '../../actions/twits';
 import ModalPostButton from '../layout/ModalPostButton';
 import Modal from '../layout/Modal';
 import Twit from '../twits/Twit';
+import NoTwits from '../twits/NoTwits';
 
 const Following = ({
   getFollowingTwits,
@@ -16,13 +17,18 @@ const Following = ({
     getFollowingTwits();
   }, [getFollowingTwits]);
 
-  return twits ? (
+  return (
     <>
-      <div className="twits-container">
-        {twits.map((twit) => (
-          <Twit twit={twit} key={twit._id} />
-        ))}
-      </div>
+      {twits.length > 0 ? (
+        <div className="twits-container">
+          {twits.map((twit) => (
+            <Twit twit={twit} key={twit._id} />
+          ))}
+        </div>
+      ) : (
+        <NoTwits msg={`You're not following anyone yet.`} />
+      )}
+
       {isAuthenticated && (
         <>
           <ModalPostButton />
@@ -30,18 +36,14 @@ const Following = ({
         </>
       )}
     </>
-  ) : (
-    <div>
-      <h1>Not following anyone</h1>
-    </div>
   );
 };
 
 Following.propTypes = {
   getFollowingTwits: PropTypes.func.isRequired,
   twits: PropTypes.array,
-  modalOpen: PropTypes.bool.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired,
+  modalOpen: PropTypes.bool,
+  isAuthenticated: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({

@@ -9,6 +9,7 @@ const asyncHandler = require('../middleware/async');
 // requires user to be logged in
 exports.followUser = asyncHandler(async (req, res, next) => {
   try {
+    // Find the user making the request
     const user = await User.findOne({ _id: req.user.id });
 
     if (!user) {
@@ -17,6 +18,18 @@ exports.followUser = asyncHandler(async (req, res, next) => {
         .json({ msg: 'Current user does not exist', success: false });
     }
 
+    // Double check to make sure user is not already followed
+    const alreadyFollowed = user.following.find(
+      (follow) => follow.username === req.params.username
+    );
+
+    if (alreadyFollowed) {
+      return res
+        .status(400)
+        .json({ msg: 'You already follow this user', success: false });
+    }
+
+    // Find the user being followed
     const userToFollow = await User.findOne({ username: req.params.username });
 
     if (!userToFollow) {
@@ -24,12 +37,6 @@ exports.followUser = asyncHandler(async (req, res, next) => {
         .status(400)
         .json({ msg: 'User to follow does not exist', success: false });
     }
-
-    user.following.forEach((follow) => {
-      if (userToFollow._id.toString() === follow.id.toString()) {
-        return res.status(400).json({ msg: 'Already following this user' });
-      }
-    });
 
     user.following.push({
       id: userToFollow._id,
@@ -45,7 +52,7 @@ exports.followUser = asyncHandler(async (req, res, next) => {
     await userToFollow.save();
 
     res.status(200).json({
-      msg: `${user.username} followed ${req.params.username}`,
+      msg: `You followed ${req.params.username}`,
       success: true,
     });
   } catch (error) {
@@ -64,10 +71,6 @@ exports.unfollowUser = asyncHandler(async (req, res, next) => {
     const user = await User.findOne({ _id: req.user.id });
     const userToUnfollow = await User.findOne({
       username: req.params.username,
-    });
-
-    const userToUnfollowProfile = await Profile.findOne({
-      user: userToUnfollow._id,
     });
 
     user.following = user.following.filter((follow, index) => {

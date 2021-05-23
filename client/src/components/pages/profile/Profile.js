@@ -6,6 +6,7 @@ import ProfileHead from './ProfileHead';
 import ModalPostButton from '../../layout/ModalPostButton';
 import Modal from '../../layout/Modal';
 import Twit from '../../twits/Twit';
+import NoTwits from '../../twits/NoTwits';
 
 const Profile = ({
   match,
@@ -23,18 +24,16 @@ const Profile = ({
     <>
       <ProfileHead profile={profile} />
 
-      {twits ? (
+      {twits.length > 0 ? (
         <>
-          <div className="twits-container profile">
+          <div className="twits-container">
             {twits.map((twit) => (
               <Twit twit={twit} key={twit._id} />
             ))}
           </div>
         </>
       ) : (
-        <div>
-          <h1>No twits</h1>
-        </div>
+        <NoTwits msg={`This user hasn't twitted anything yet.`} />
       )}
 
       {isAuthenticated && (
@@ -50,6 +49,9 @@ const Profile = ({
 Profile.propTypes = {
   getProfile: PropTypes.func.isRequired,
   twits: PropTypes.array,
+  profile: PropTypes.object.isRequired,
+  isAuthenticated: PropTypes.bool,
+  modalOpen: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
