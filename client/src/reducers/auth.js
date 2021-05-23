@@ -2,9 +2,7 @@ import {
   USER_LOADED,
   LOGOUT,
   REGISTER_SUCCESS,
-  REGISTER_FAIL,
   LOGIN_SUCCESS,
-  LOGIN_FAIL,
   AUTH_ERROR,
 } from '../actions/types';
 
@@ -31,8 +29,6 @@ function authReducer(state = initialState, action) {
         loading: false,
       };
     case AUTH_ERROR:
-    case REGISTER_FAIL:
-    case LOGIN_FAIL:
     case LOGOUT:
       localStorage.removeItem('token');
       return {

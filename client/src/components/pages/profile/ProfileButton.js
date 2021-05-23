@@ -3,30 +3,34 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { followUser, unfollowUser } from '../../../actions/follow';
 
-const ProfileButton = ({ profile, user, unfollowUser, followUser }) => {
+const ProfileButton = ({
+  match,
+  profile,
+  user,
+  unfollowUser,
+  followUser,
+  following,
+}) => {
   const [isCurrentUser, setCurrentUser] = useState(false);
+
   const [isFollowing, setFollowing] = useState(false);
 
   useEffect(() => {
-    const alreadyFollowed = alreadyFollowing(user.following, profile.username);
-    setFollowing(alreadyFollowed !== undefined);
+    const alreadyFollowed = alreadyFollowing(following, profile.username);
 
     setCurrentUser(user.username === profile.username);
-  }, [profile.username, user.following, user.username]);
+    setFollowing(alreadyFollowed !== undefined);
+  }, [
+    setFollowing,
+    setCurrentUser,
+    profile.username,
+    following,
+    user.username,
+  ]);
 
   const alreadyFollowing = (following, userToFollow) => {
     return following.find((follow) => follow.username === userToFollow);
   };
-
-  // let currentUser = false;
-  // let isFollowing = false;
-
-  // if (user) {
-  //   currentUser = user.username === profile.username;
-  //   isFollowing =
-  //     user.following.filter((follow) => follow.username === profile.username)
-  //       .length > 0;
-  // }
 
   return (
     <>
@@ -35,7 +39,10 @@ const ProfileButton = ({ profile, user, unfollowUser, followUser }) => {
       {!isCurrentUser && !isFollowing && (
         <button
           className="btn btn-follow"
-          onClick={() => followUser(profile.username)}
+          onClick={() => {
+            setFollowing(true);
+            followUser(profile.username);
+          }}
         >
           Follow
         </button>
@@ -44,7 +51,10 @@ const ProfileButton = ({ profile, user, unfollowUser, followUser }) => {
       {!isCurrentUser && isFollowing && (
         <button
           className="btn btn-unfollow"
-          onClick={() => unfollowUser(profile.username)}
+          onClick={() => {
+            setFollowing(false);
+            unfollowUser(profile.username);
+          }}
         >
           Unfollow
         </button>
@@ -58,11 +68,13 @@ ProfileButton.propTypes = {
   user: PropTypes.object,
   followUser: PropTypes.func.isRequired,
   unfollowUser: PropTypes.func.isRequired,
+  following: PropTypes.array,
 };
 
 const mapStateToProps = (state) => ({
   user: state.auth.user,
   isAuthenticated: state.auth.isAuthenticated,
+  following: state.auth.user.following,
 });
 
 export default connect(mapStateToProps, { followUser, unfollowUser })(

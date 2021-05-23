@@ -2,6 +2,68 @@ const User = require('../models/User');
 const Profile = require('../models/Profile');
 const asyncHandler = require('../middleware/async');
 
+// // ************ GET ROUTE ************
+// Route: POST /api/v1/:username/following
+// Finds who the user is following
+exports.getFollowing = asyncHandler(async (req, res, next) => {
+  try {
+    if (!req.params.username) {
+      return res
+        .status(400)
+        .json({ msg: 'This user does not exist', success: false });
+    }
+
+    const following = await User.findOne({
+      username: req.params.username,
+    }).select('following');
+
+    if (!following) {
+      return res
+        .status(400)
+        .json({ msg: 'This user does not follow anyone', success: false });
+    }
+
+    res
+      .status(200)
+      .json({ msg: 'Found who the user follows', following, success: true });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ msg: 'Server error', success: false, error: error.message });
+  }
+});
+
+// // ************ GET ROUTE ************
+// Route: POST /api/v1/:username/followers
+// Finds who is following the user
+exports.getFollowers = asyncHandler(async (req, res, next) => {
+  try {
+    if (!req.params.username) {
+      return res
+        .status(400)
+        .json({ msg: 'This user does not exist', success: false });
+    }
+
+    const followers = await User.findOne({
+      username: req.params.username,
+    }).select('followers');
+
+    if (!followers) {
+      return res
+        .status(400)
+        .json({ msg: 'No one follows this user', success: false });
+    }
+
+    res
+      .status(200)
+      .json({ msg: 'Found who follows the user', followers, success: true });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ msg: 'Server error', success: false, error: error.message });
+  }
+});
+
 // 👍 FOLLOW AND UNFOLLOW 👎
 // ************ POST ROUTE ************
 // Route: POST /api/v1/:username/follow
@@ -30,7 +92,9 @@ exports.followUser = asyncHandler(async (req, res, next) => {
     }
 
     // Find the user being followed
-    const userToFollow = await User.findOne({ username: req.params.username });
+    const userToFollow = await User.findOne({
+      username: req.params.username,
+    });
 
     if (!userToFollow) {
       return res
@@ -53,6 +117,7 @@ exports.followUser = asyncHandler(async (req, res, next) => {
 
     res.status(200).json({
       msg: `You followed ${req.params.username}`,
+      user,
       success: true,
     });
   } catch (error) {
@@ -86,9 +151,10 @@ exports.unfollowUser = asyncHandler(async (req, res, next) => {
     await user.save();
     await userToUnfollow.save();
 
-    res
-      .status(200)
-      .json({ msg: `${user.username} unfollowed ${req.params.username}` });
+    res.status(200).json({
+      msg: `${user.username} unfollowed ${req.params.username}`,
+      user,
+    });
   } catch (error) {
     res.status(500).json({ msg: 'Server error', error: error.message });
   }

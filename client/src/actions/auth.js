@@ -5,9 +5,7 @@ import {
   USER_LOADED,
   LOGOUT,
   REGISTER_SUCCESS,
-  REGISTER_FAIL,
   LOGIN_SUCCESS,
-  LOGIN_FAIL,
   AUTH_ERROR,
 } from './types';
 
@@ -19,6 +17,7 @@ export const loadUser = () => async (dispatch) => {
 
   try {
     const res = await axios.get('/api/v1/auth');
+
     dispatch({
       type: USER_LOADED,
       payload: res.data,
@@ -27,6 +26,7 @@ export const loadUser = () => async (dispatch) => {
     dispatch({
       type: AUTH_ERROR,
     });
+    dispatch(popupToast(error.response.data.msg, 'failure'));
   }
 };
 
@@ -50,7 +50,7 @@ export const register =
       });
       dispatch(loadUser());
     } catch (error) {
-      dispatch({ type: REGISTER_FAIL });
+      dispatch({ type: AUTH_ERROR });
       dispatch(popupToast(error.response.data.msg, 'failure'));
     }
   };
@@ -75,7 +75,7 @@ export const login =
       });
       dispatch(loadUser());
     } catch (error) {
-      dispatch({ type: LOGIN_FAIL });
+      dispatch({ type: AUTH_ERROR });
       dispatch(popupToast(error.response.data.msg, 'failure'));
     }
   };

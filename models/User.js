@@ -22,12 +22,12 @@ const UserSchema = new mongoose.Schema(
       minLength: 6,
       select: false,
     },
-    followers: [],
-    following: [],
     createdDate: {
       type: Date,
       default: Date.now(),
     },
+    followers: [],
+    following: [],
   },
   {
     toJSON: { virtuals: true },

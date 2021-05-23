@@ -6,7 +6,13 @@ const {
   updateProfile,
   deleteUser,
 } = require('../controllers/profile');
-const { followUser, unfollowUser } = require('../controllers/follow');
+
+const {
+  followUser,
+  unfollowUser,
+  getFollowing,
+  getFollowers,
+} = require('../controllers/follow');
 
 const router = express.Router({ mergeParams: true });
 
@@ -19,5 +25,7 @@ router
 
 router.route('/follow').post(loggedIn, followUser);
 router.route('/unfollow').post(loggedIn, unfollowUser);
+router.route('/following').get(getFollowing);
+router.route('/followers').get(getFollowers);
 
 module.exports = router;
