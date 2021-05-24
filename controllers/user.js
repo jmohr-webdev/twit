@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const Profile = require('../models/Profile');
+const Follows = require('../models/Follows');
 const asyncHandler = require('../middleware/async');
 
 // ************ GET ROUTE ************
@@ -48,6 +49,7 @@ exports.registerUser = asyncHandler(async (req, res, next) => {
     newUser = await User.create(newUser);
 
     await Profile.create({ user: newUser._id, username: newUser.username });
+    await Follows.create({ user: newUser._id, username: newUser.username });
 
     const payload = {
       user: {

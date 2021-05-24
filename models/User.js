@@ -26,8 +26,6 @@ const UserSchema = new mongoose.Schema(
       type: Date,
       default: Date.now(),
     },
-    followers: [],
-    following: [],
   },
   {
     toJSON: { virtuals: true },

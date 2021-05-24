@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const Profile = require('../models/Profile');
+const Follows = require('../models/Follows');
 const asyncHandler = require('../middleware/async');
 
 // // ************ GET ROUTE ************
@@ -7,25 +8,21 @@ const asyncHandler = require('../middleware/async');
 // Finds who the user is following
 exports.getFollowing = asyncHandler(async (req, res, next) => {
   try {
-    if (!req.params.username) {
-      return res
-        .status(400)
-        .json({ msg: 'This user does not exist', success: false });
-    }
-
-    const following = await User.findOne({
+    const following = await Follows.findOne({
       username: req.params.username,
     }).select('following');
 
     if (!following) {
       return res
         .status(400)
-        .json({ msg: 'This user does not follow anyone', success: false });
+        .json({ msg: 'This user does not exist', success: false });
     }
 
-    res
-      .status(200)
-      .json({ msg: 'Found who the user follows', following, success: true });
+    res.status(200).json({
+      msg: `Found who ${req.params.username} follows`,
+      following,
+      success: true,
+    });
   } catch (error) {
     res
       .status(500)
@@ -38,25 +35,21 @@ exports.getFollowing = asyncHandler(async (req, res, next) => {
 // Finds who is following the user
 exports.getFollowers = asyncHandler(async (req, res, next) => {
   try {
-    if (!req.params.username) {
-      return res
-        .status(400)
-        .json({ msg: 'This user does not exist', success: false });
-    }
-
-    const followers = await User.findOne({
+    const followers = await Follows.findOne({
       username: req.params.username,
     }).select('followers');
 
     if (!followers) {
       return res
         .status(400)
-        .json({ msg: 'No one follows this user', success: false });
+        .json({ msg: 'Could not retrieve followers', success: false });
     }
 
-    res
-      .status(200)
-      .json({ msg: 'Found who follows the user', followers, success: true });
+    res.status(200).json({
+      msg: `Found who follows ${req.params.username}`,
+      followers,
+      success: true,
+    });
   } catch (error) {
     res
       .status(500)
@@ -71,14 +64,9 @@ exports.getFollowers = asyncHandler(async (req, res, next) => {
 // requires user to be logged in
 exports.followUser = asyncHandler(async (req, res, next) => {
   try {
-    // Find the user making the request
-    const user = await User.findOne({ _id: req.user.id });
-
-    if (!user) {
-      return res
-        .status(400)
-        .json({ msg: 'Current user does not exist', success: false });
-    }
+    const user = await Follows.findOne({ user: req.user.id }).select(
+      'username following'
+    );
 
     // Double check to make sure user is not already followed
     const alreadyFollowed = user.following.find(
@@ -92,7 +80,7 @@ exports.followUser = asyncHandler(async (req, res, next) => {
     }
 
     // Find the user being followed
-    const userToFollow = await User.findOne({
+    const userToFollow = await Follows.findOne({
       username: req.params.username,
     });
 
@@ -116,7 +104,7 @@ exports.followUser = asyncHandler(async (req, res, next) => {
     await userToFollow.save();
 
     res.status(200).json({
-      msg: `You followed ${req.params.username}`,
+      msg: `${user.username} followed ${req.params.username}`,
       user,
       success: true,
     });
@@ -133,8 +121,8 @@ exports.followUser = asyncHandler(async (req, res, next) => {
 // requires user to be logged in
 exports.unfollowUser = asyncHandler(async (req, res, next) => {
   try {
-    const user = await User.findOne({ _id: req.user.id });
-    const userToUnfollow = await User.findOne({
+    const user = await Follows.findOne({ user: req.user.id });
+    const userToUnfollow = await Follows.findOne({
       username: req.params.username,
     });
 

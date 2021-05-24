@@ -1,6 +1,7 @@
 const Twit = require('../models/Twit');
 const User = require('../models/User');
 const Profile = require('../models/Profile');
+const Follows = require('../models/Follows');
 const asyncHandler = require('../middleware/async');
 
 // ************ GET ROUTE ************
@@ -82,17 +83,31 @@ exports.getUserTwits = asyncHandler(async (req, res, next) => {
 // Requires user to be logged in
 exports.getFollowingTwits = asyncHandler(async (req, res, next) => {
   try {
-    const user = await User.findById(req.user.id);
+    const userFollowing = await Follows.findOne({ user: req.user.id });
 
-    let following = user.following.map((follow) => follow.id);
+    if (!userFollowing) {
+      return res.status(400).json({
+        msg: 'The current user does not exist',
+        success: false,
+      });
+    }
+
+    let following = userFollowing.following.map((follow) => follow.id);
 
     const twits = await Twit.find({ user: { $in: following } })
       .sort({ createdDate: -1 })
       .limit(10);
 
+    if (!twits) {
+      return res.status(400).json({
+        msg: 'The current user does not exist',
+        success: false,
+      });
+    }
+
     res.status(200).json({
-      msg: `Get all twits from users ${user.username} is following`,
-      following: user.following,
+      msg: `Get all twits from users ${userFollowing.username} is following`,
+      following: userFollowing.following,
       twits,
     });
   } catch (error) {
