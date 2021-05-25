@@ -92,9 +92,9 @@ exports.getFollowingTwits = asyncHandler(async (req, res, next) => {
       });
     }
 
-    let following = userFollowing.following.map((follow) => follow.id);
+    let following = userFollowing.following.map((follow) => follow.username);
 
-    const twits = await Twit.find({ user: { $in: following } })
+    const twits = await Twit.find({ username: { $in: following } })
       .sort({ createdDate: -1 })
       .limit(10);
 

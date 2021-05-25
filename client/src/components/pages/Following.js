@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { getFollowing } from '../../actions/follow';
 import { getFollowingTwits } from '../../actions/twits';
 import ModalPostButton from '../layout/ModalPostButton';
 import Modal from '../layout/Modal';
@@ -9,13 +10,18 @@ import NoTwits from '../twits/NoTwits';
 
 const Following = ({
   getFollowingTwits,
+  getFollowing,
   twits,
   modalOpen,
   isAuthenticated,
+  user,
 }) => {
   useEffect(() => {
+    if (user) {
+      getFollowing(user.username);
+    }
     getFollowingTwits();
-  }, [getFollowingTwits]);
+  }, [getFollowingTwits, user, getFollowing]);
 
   return (
     <>
@@ -47,9 +53,12 @@ Following.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
+  user: state.auth.user,
   twits: state.twits.twits,
   modalOpen: state.modal.modalOpen,
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { getFollowingTwits })(Following);
+export default connect(mapStateToProps, { getFollowingTwits, getFollowing })(
+  Following
+);

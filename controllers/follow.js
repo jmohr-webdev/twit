@@ -64,9 +64,23 @@ exports.getFollowers = asyncHandler(async (req, res, next) => {
 // requires user to be logged in
 exports.followUser = asyncHandler(async (req, res, next) => {
   try {
-    const user = await Follows.findOne({ user: req.user.id }).select(
-      'username following'
-    );
+    let user = await Follows.findOne({ user: req.user.id });
+
+    // If there is no Follows document, creates one if the user exists in database
+    if (!user) {
+      const createProfile = await User.findOne({ user: req.user.id });
+
+      if (!createProfile) {
+        return res
+          .status(400)
+          .json({ msg: 'Logged in user does not exist', success: false });
+      }
+
+      user = await Follows.create({
+        user: createProfile._id,
+        username: createProfile.username,
+      });
+    }
 
     // Double check to make sure user is not already followed
     const alreadyFollowed = user.following.find(
@@ -80,26 +94,39 @@ exports.followUser = asyncHandler(async (req, res, next) => {
     }
 
     // Find the user being followed
-    const userToFollow = await Follows.findOne({
+    let userToFollow = await Follows.findOne({
       username: req.params.username,
     });
 
+    // If there is no Follows document, creates one if the userToFollow exists in database
     if (!userToFollow) {
-      return res
-        .status(400)
-        .json({ msg: 'User to follow does not exist', success: false });
+      const createProfile = await User.findOne({ user: req.user.id });
+
+      if (!createProfile) {
+        return res
+          .status(400)
+          .json({ msg: 'User to follow does not exist', success: false });
+      }
+
+      userToFollow = await Follows.create({
+        user: createProfile._id,
+        username: createProfile.username,
+      });
     }
 
+    // Add userToFollow to User's following list
     user.following.push({
-      id: userToFollow._id,
+      user: userToFollow.user,
       username: userToFollow.username,
     });
 
+    // Add user to userToFollow's follower list
     userToFollow.followers.push({
-      id: user._id,
+      user: user.user,
       username: user.username,
     });
 
+    // Save documents
     await user.save();
     await userToFollow.save();
 
@@ -126,14 +153,12 @@ exports.unfollowUser = asyncHandler(async (req, res, next) => {
       username: req.params.username,
     });
 
-    user.following = user.following.filter((follow, index) => {
-      userToUnfollow._id.toString() !== follow.id.toString();
-    });
+    user.following = user.following.filter(
+      (follow) => userToUnfollow.user.toString() !== follow.user.toString()
+    );
 
     userToUnfollow.followers = userToUnfollow.followers.filter(
-      (follower, index) => {
-        user._id.toString() !== follower.id.toString();
-      }
+      (follower) => user.user.toString() !== follower.user.toString()
     );
 
     await user.save();

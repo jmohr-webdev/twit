@@ -22,12 +22,14 @@ const followReducer = (state = initialState, action) => {
     case FOLLOW_USER:
       return {
         ...state,
-        following: payload,
+        following: [...state.following, payload],
       };
     case UNFOLLOW_USER:
       return {
         ...state,
-        following: payload,
+        following: state.following.filter(
+          (follow) => follow.username !== payload
+        ),
       };
     case GET_FOLLOWERS:
       return {

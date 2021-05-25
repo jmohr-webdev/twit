@@ -1,36 +1,50 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { followUser, unfollowUser } from '../../../actions/follow';
+import {
+  getFollowing,
+  followUser,
+  unfollowUser,
+} from '../../../actions/follow';
 
 const ProfileButton = ({
-  match,
   profile,
   user,
+  getFollowing,
   unfollowUser,
   followUser,
   following,
 }) => {
   const [isCurrentUser, setCurrentUser] = useState(false);
-
   const [isFollowing, setFollowing] = useState(false);
 
+  // useEffect(() => {
+  //   if (user) {
+  //     setCurrentUser(user.username === profile.username);
+  //   }
+  //   const alreadyFollowed = alreadyFollowing(following, profile.username);
+
+  //   setFollowing(alreadyFollowed !== undefined);
+  //   getFollowing(user.username);
+  // }, [
+  //   setFollowing,
+  //   setCurrentUser,
+  //   profile.username,
+  //   following,
+  //   user.username,
+  // ]);
+
+  // const alreadyFollowing = (following, userToFollow) => {
+  //   return following.find((follow) => follow.username === userToFollow);
+  // };
+
   useEffect(() => {
-    const alreadyFollowed = alreadyFollowing(following, profile.username);
-
-    setCurrentUser(user.username === profile.username);
-    setFollowing(alreadyFollowed !== undefined);
-  }, [
-    setFollowing,
-    setCurrentUser,
-    profile.username,
-    following,
-    user.username,
-  ]);
-
-  const alreadyFollowing = (following, userToFollow) => {
-    return following.find((follow) => follow.username === userToFollow);
-  };
+    getFollowing(user.username);
+    setCurrentUser(profile.username === user.username);
+    setFollowing(
+      following.find((follow) => follow.username === profile.username)
+    );
+  }, [user.username, profile.username, getFollowing]);
 
   return (
     <>
@@ -74,9 +88,11 @@ ProfileButton.propTypes = {
 const mapStateToProps = (state) => ({
   user: state.auth.user,
   isAuthenticated: state.auth.isAuthenticated,
-  following: state.auth.user.following,
+  following: state.follow.following,
 });
 
-export default connect(mapStateToProps, { followUser, unfollowUser })(
-  ProfileButton
-);
+export default connect(mapStateToProps, {
+  followUser,
+  unfollowUser,
+  getFollowing,
+})(ProfileButton);
