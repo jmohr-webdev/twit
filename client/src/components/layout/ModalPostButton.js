@@ -4,13 +4,9 @@ import { toggleModal } from '../../actions/modal';
 import { connect } from 'react-redux';
 
 const ModalPostButton = ({ toggleModal }) => {
-  const handleClick = () => {
-    toggleModal();
-  };
-
   return (
     <>
-      <button className="add-button" onClick={(e) => handleClick(e)}>
+      <button className="add-button" onClick={toggleModal}>
         <i className="fas fa-plus"></i>
       </button>
     </>

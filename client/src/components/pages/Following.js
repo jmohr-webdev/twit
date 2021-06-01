@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { getFollowing } from '../../actions/follow';
 import { getFollowingTwits } from '../../actions/twits';
 import ModalPostButton from '../layout/ModalPostButton';
-import Modal from '../layout/Modal';
+import PostModal from '../layout/PostModal';
 import Twit from '../twits/Twit';
 import NoTwits from '../twits/NoTwits';
 
@@ -15,6 +15,7 @@ const Following = ({
   modalOpen,
   isAuthenticated,
   user,
+  following,
 }) => {
   useEffect(() => {
     if (user) {
@@ -32,13 +33,19 @@ const Following = ({
           ))}
         </div>
       ) : (
-        <NoTwits msg={`You're not following anyone yet.`} />
+        <NoTwits
+          msg={
+            following <= 0
+              ? `You're not following anyone yet.`
+              : `No one you follow has twitted anything yet`
+          }
+        />
       )}
 
       {isAuthenticated && (
         <>
           <ModalPostButton />
-          {modalOpen && <Modal />}
+          {modalOpen && <PostModal />}
         </>
       )}
     </>
@@ -47,9 +54,12 @@ const Following = ({
 
 Following.propTypes = {
   getFollowingTwits: PropTypes.func.isRequired,
+  getFollowing: PropTypes.func.isRequired,
   twits: PropTypes.array,
   modalOpen: PropTypes.bool,
   isAuthenticated: PropTypes.bool,
+  user: PropTypes.object,
+  following: PropTypes.array,
 };
 
 const mapStateToProps = (state) => ({
@@ -57,6 +67,7 @@ const mapStateToProps = (state) => ({
   twits: state.twits.twits,
   modalOpen: state.modal.modalOpen,
   isAuthenticated: state.auth.isAuthenticated,
+  following: state.follow.following,
 });
 
 export default connect(mapStateToProps, { getFollowingTwits, getFollowing })(

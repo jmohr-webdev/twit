@@ -1,7 +1,8 @@
-import { GET_PROFILE, PROFILE_ERROR } from '../actions/types';
+import { GET_PROFILE, UPDATE_PROFILE, PROFILE_ERROR } from '../actions/types';
 
 const initialState = {
   profile: {},
+  editModalOpen: false,
   loading: true,
 };
 
@@ -10,6 +11,7 @@ function profileReducer(state = initialState, action) {
 
   switch (type) {
     case GET_PROFILE:
+    case UPDATE_PROFILE:
       return {
         ...state,
         profile: payload,

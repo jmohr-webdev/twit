@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getAllTwits } from '../../actions/twits';
 import ModalPostButton from '../layout/ModalPostButton';
-import Modal from '../layout/Modal';
+import PostModal from '../layout/PostModal';
 import Twit from '../twits/Twit';
 import NoTwits from '../twits/NoTwits';
 
@@ -29,7 +29,7 @@ const Home = ({ getAllTwits, twits, modalOpen, isAuthenticated }) => {
       {isAuthenticated && (
         <>
           <ModalPostButton />
-          {modalOpen && <Modal />}
+          {modalOpen && <PostModal />}
         </>
       )}
     </>

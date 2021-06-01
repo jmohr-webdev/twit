@@ -26,8 +26,7 @@ const Modal = ({ toggleModal, postTwit }) => {
           onSubmit={(e) => {
             e.preventDefault();
             postTwit({ content });
-            setContent('');
-            toggleModal();
+            handleClose();
           }}
         >
           <textarea
@@ -36,7 +35,15 @@ const Modal = ({ toggleModal, postTwit }) => {
             onChange={(e) => setContent(e.target.value)}
             required
           />
-          <input type="submit" className="btn post" value="Post" />
+          <div className="form-buttons">
+            <input
+              type="cancel"
+              className="btn cancel"
+              value="Cancel"
+              onClick={handleClose}
+            />
+            <input type="submit" className="btn post" value="Post" />
+          </div>
         </form>
       </div>
     </div>

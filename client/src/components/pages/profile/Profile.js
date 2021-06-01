@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { getProfile } from '../../../actions/profile';
 import ProfileHead from './ProfileHead';
 import ModalPostButton from '../../layout/ModalPostButton';
-import Modal from '../../layout/Modal';
+import PostModal from '../../layout/PostModal';
+import ProfileEditModal from './ProfileEditModal';
 import Twit from '../../twits/Twit';
 import NoTwits from '../../twits/NoTwits';
 
@@ -15,6 +16,7 @@ const Profile = ({
   profile,
   isAuthenticated,
   modalOpen,
+  profileModalOpen,
 }) => {
   useEffect(() => {
     getProfile(match.params.username);
@@ -39,9 +41,11 @@ const Profile = ({
       {isAuthenticated && (
         <>
           <ModalPostButton />
-          {modalOpen && <Modal />}
+          {modalOpen && <PostModal />}
         </>
       )}
+
+      {profileModalOpen && <ProfileEditModal />}
     </>
   );
 };
@@ -52,6 +56,7 @@ Profile.propTypes = {
   profile: PropTypes.object.isRequired,
   isAuthenticated: PropTypes.bool,
   modalOpen: PropTypes.bool,
+  profileModalOpen: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
@@ -59,6 +64,7 @@ const mapStateToProps = (state) => ({
   profile: state.profile.profile,
   modalOpen: state.modal.modalOpen,
   isAuthenticated: state.auth.isAuthenticated,
+  profileModalOpen: state.modal.profileModalOpen,
 });
 
 export default connect(mapStateToProps, { getProfile })(Profile);

@@ -83,7 +83,7 @@ exports.updateProfile = asyncHandler(async (req, res, next) => {
     res.status(200).json({
       success: true,
       msg: `Updated ${req.params.username} profile`,
-      data: profile,
+      profile,
     });
   } catch (error) {
     res.status(500).json({ error: error.message, success: false });

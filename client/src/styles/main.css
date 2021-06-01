@@ -261,6 +261,7 @@
   margin-top: 100px;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 5px;
+  border: none;
 }
 
 .modal-title {
@@ -292,17 +293,18 @@
   color: #fff;
 }
 
-.btn.post {
+.btn.post,
+.btn.save,
+.btn.cancel {
+  display: inline-block;
   position: absolute;
-  bottom: 10px;
-  right: 10px;
-  width: 200px;
+  width: 150px;
   height: 50px;
   border: 0;
   border-radius: 5px;
-  background-color: #008716;
   color: #fff;
   text-transform: uppercase;
+  text-align: center;
   font-weight: 600;
   font-size: 1.25rem;
   outline: none;
@@ -310,11 +312,30 @@
   transition: all 0.2s ease-in-out;
 }
 
+.btn.post,
+.btn.save {
+  bottom: 10px;
+  right: 10px;
+  width: 150px;
+  background-color: #008716;
+}
+
+.btn.cancel {
+  bottom: 10px;
+  right: 170px;
+  background-color: #d41e45;
+}
+
+.btn.cancel:hover,
+.btn.cancel:active {
+  background-color: #a11634;
+}
+
 .btn.post:hover,
-.btn.post:active {
+.btn.post:active,
+.btn.save:hover,
+.btn.save:active {
   background-color: #1ed442;
-  -webkit-transform: scale(1.02);
-          transform: scale(1.02);
 }
 
 .twit-post-content {
@@ -429,6 +450,35 @@
   -webkit-transform: scale(1.02);
           transform: scale(1.02);
   background-color: #9c4b96;
+}
+
+form.profile-form {
+  display: block;
+  width: 90%;
+  margin: 70px auto 0;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+.form-group textarea {
+  height: 150px;
+  resize: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border: 1px solid #d41e45;
+}
+
+.form-group:not(:first-child) {
+  margin-top: 20px;
 }
 
 .twits-container {

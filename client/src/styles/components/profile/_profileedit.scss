@@ -1,0 +1,28 @@
+form.profile-form {
+  display: block;
+  width: 90%;
+  margin: 70px auto 0;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+.form-group textarea {
+  height: 150px;
+  resize: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border: 1px solid $bright-color;
+}
+
+.form-group:not(:first-child) {
+  margin-top: 20px;
+}

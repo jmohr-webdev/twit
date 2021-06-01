@@ -1,7 +1,8 @@
-import { TOGGLE_MODAL } from '../actions/types';
+import { TOGGLE_MODAL, TOGGLE_PROFILE_MODAL } from '../actions/types';
 
 const initialState = {
   modalOpen: false,
+  profileModalOpen: false,
 };
 
 const modalReducer = (state = initialState, action) => {
@@ -12,6 +13,11 @@ const modalReducer = (state = initialState, action) => {
       return {
         ...state,
         modalOpen: !state.modalOpen,
+      };
+    case TOGGLE_PROFILE_MODAL:
+      return {
+        ...state,
+        profileModalOpen: !state.profileModalOpen,
       };
     default:
       return state;

@@ -6,6 +6,7 @@ import {
   followUser,
   unfollowUser,
 } from '../../../actions/follow';
+import { toggleProfileModal } from '../../../actions/modal';
 
 const ProfileButton = ({
   profile,
@@ -14,29 +15,11 @@ const ProfileButton = ({
   unfollowUser,
   followUser,
   following,
+  toggleProfileModal,
+  profileModalOpen,
 }) => {
   const [isCurrentUser, setCurrentUser] = useState(false);
   const [isFollowing, setFollowing] = useState(false);
-
-  // useEffect(() => {
-  //   if (user) {
-  //     setCurrentUser(user.username === profile.username);
-  //   }
-  //   const alreadyFollowed = alreadyFollowing(following, profile.username);
-
-  //   setFollowing(alreadyFollowed !== undefined);
-  //   getFollowing(user.username);
-  // }, [
-  //   setFollowing,
-  //   setCurrentUser,
-  //   profile.username,
-  //   following,
-  //   user.username,
-  // ]);
-
-  // const alreadyFollowing = (following, userToFollow) => {
-  //   return following.find((follow) => follow.username === userToFollow);
-  // };
 
   useEffect(() => {
     getFollowing(user.username);
@@ -48,7 +31,11 @@ const ProfileButton = ({
 
   return (
     <>
-      {isCurrentUser && <button className="btn btn-edit">Edit Profile</button>}
+      {isCurrentUser && (
+        <button className="btn btn-edit" onClick={toggleProfileModal}>
+          Edit Profile
+        </button>
+      )}
 
       {!isCurrentUser && !isFollowing && (
         <button
@@ -83,16 +70,19 @@ ProfileButton.propTypes = {
   followUser: PropTypes.func.isRequired,
   unfollowUser: PropTypes.func.isRequired,
   following: PropTypes.array,
+  toggleProfileModal: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   user: state.auth.user,
   isAuthenticated: state.auth.isAuthenticated,
   following: state.follow.following,
+  profileModalOpen: state.modal.profileModalOpen,
 });
 
 export default connect(mapStateToProps, {
   followUser,
   unfollowUser,
   getFollowing,
+  toggleProfileModal,
 })(ProfileButton);
