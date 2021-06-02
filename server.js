@@ -6,6 +6,7 @@ const user = require('./routes/user');
 const twits = require('./routes/twits');
 const profile = require('./routes/profile');
 const auth = require('./routes/auth');
+const path = require('path');
 
 const app = express();
 dotenv.config({ path: './config/config.env' });
