@@ -24,6 +24,16 @@ app.use('/api/v1/auth', auth);
 app.use('/api/v1/twits', twits);
 app.use('/api/v1/:username', profile);
 
+// Serve static assets in production
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static('client/build'));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
+
 app.listen(PORT, () => {
   console.log(`Now listening on port ${PORT}`.rainbow.bgBlack);
 });
