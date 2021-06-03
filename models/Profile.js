@@ -13,9 +13,11 @@ const ProfileSchema = new mongoose.Schema(
     },
     bio: {
       type: String,
+      maxLength: 180,
     },
     location: {
       type: String,
+      maxLength: 50,
     },
   },
   {

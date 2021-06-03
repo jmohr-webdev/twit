@@ -26,7 +26,6 @@ export const loadUser = () => async (dispatch) => {
     dispatch({
       type: AUTH_ERROR,
     });
-    dispatch(popupToast(error.response.data.msg, 'failure'));
   }
 };
 

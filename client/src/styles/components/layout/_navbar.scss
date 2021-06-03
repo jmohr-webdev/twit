@@ -23,15 +23,15 @@
   color: $bright-white;
 }
 
-.navbar-auth {
-  border-bottom: 1px solid #ff798f;
+.navbar i {
+  color: $bright-white;
+  position: absolute;
+  right: 20px;
+  top: 8px;
 }
 
-.nav.nav-links {
-  display: flex;
-  position: absolute;
-  right: 10px;
-  list-style-type: none;
+.navbar-auth {
+  border-bottom: 1px solid #ff798f;
 }
 
 .nav-links a {
@@ -39,8 +39,46 @@
   color: $base-white-color;
   text-decoration: none;
   transition: all 0.3s ease-in;
+  width: 100vw;
 }
 
-.nav-links a:hover {
+.dropdown-nav {
+  position: absolute;
+  top: 49px;
+  left: 0;
+}
+
+.dropdown-nav li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  border-top: 1px solid $light-dark-color;
+  transition: all 0.3s ease-in;
+}
+
+.dropdown-nav li:last-child {
+  border-bottom: 1px solid $light-dark-color;
+}
+
+.dropdown-nav li:hover,
+.dropdown-nav li:active {
+  background-color: $light-dark-color;
+}
+
+.dropdown-nav li a {
+  transition: all 0.3s ease-in;
+}
+
+.dropdown-nav li:hover a {
   color: $bright-white;
+}
+
+.show {
+  visibility: visible;
+  display: block;
+  width: 100vw;
+  background-color: $base-dark-color;
+  color: $base-white-color;
 }

@@ -1,14 +1,49 @@
 /* ******************* MEDIA QUERIES ******************* */
 
+.hide-on-small {
+  display: none;
+  visibility: hidden;
+}
+
+.hide-on-large {
+  visibility: visible;
+}
+
+/* ******************* SMALL: >576 BREAKPOINT ******************* */
+@media screen and (min-width: 576px) {
+  .hide-on-small {
+    display: block;
+    visibility: visible;
+  }
+
+  .hide-on-large {
+    visibility: hidden;
+  }
+
+  .nav.nav-links {
+    display: flex;
+    position: absolute;
+    right: 10px;
+    list-style-type: none;
+  }
+
+  .nav-links a {
+    margin-right: 20px;
+    color: $base-white-color;
+    text-decoration: none;
+    transition: all 0.3s ease-in;
+  }
+
+  .nav-links a:hover {
+    color: $bright-white;
+  }
+}
+
+/* ******************* LARGE: >992 BREAKPOINT ******************* */
 @media screen and (min-width: 992px) {
   .navbar {
     justify-content: center;
     margin-left: 0;
-  }
-
-  .hide-on-small {
-    visibility: visible;
-    z-index: 2;
   }
 
   .circle-container {

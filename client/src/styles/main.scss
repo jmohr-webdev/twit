@@ -12,6 +12,7 @@
 @import './components/profile/profileedit';
 @import './components/twits/twit';
 @import './components/twits/notwits';
+
 @import './media_queries/mediaqueries';
 
 /* ******************* GLOBAL ******************* */
@@ -55,8 +56,4 @@ a {
     justify-content: center;
     overflow: hidden;
   }
-}
-
-.hide-on-small {
-  visibility: hidden;
 }
