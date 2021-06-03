@@ -28,6 +28,7 @@
 .details-container {
   margin-left: 50px;
   color: $base-white-color;
+  max-width: 40%;
 }
 
 .details-container h1 {
@@ -49,7 +50,8 @@
 .btn-edit,
 .btn-unfollow {
   margin-top: 20px;
-  width: 200px;
+  width: 100%;
+  max-width: 200px;
   padding: 10px;
   border: 0;
   border-radius: 5px;

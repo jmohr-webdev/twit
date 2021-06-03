@@ -140,6 +140,15 @@
   border-bottom: 1px solid #ff798f;
 }
 
+.guest.nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  right: 10px;
+  list-style-type: none;
+}
+
 .nav-links a {
   margin-right: 20px;
   color: #ccc;
@@ -317,7 +326,7 @@
   width: 100%;
   background-color: rgba(212, 30, 69, 0.85);
   padding: 10px;
-  color: #ccc;
+  color: #fff;
   text-align: center;
   text-transform: uppercase;
   font-family: 'Raleway', serif;
@@ -441,6 +450,7 @@
 .details-container {
   margin-left: 50px;
   color: #ccc;
+  max-width: 40%;
 }
 
 .details-container h1 {
@@ -462,7 +472,8 @@
 .btn-edit,
 .btn-unfollow {
   margin-top: 20px;
-  width: 200px;
+  width: 100%;
+  max-width: 200px;
   padding: 10px;
   border: 0;
   border-radius: 5px;

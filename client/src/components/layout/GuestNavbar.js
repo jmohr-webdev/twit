@@ -7,7 +7,7 @@ const GuestNavbar = () => {
       <Link to="/">
         <span className="brand">Twit</span>
       </Link>
-      <ul className="nav nav-links">
+      <ul className="nav guest nav-links">
         <li className="nav-link">
           <NavLink
             to="/register"
