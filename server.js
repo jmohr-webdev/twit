@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const colors = require('colors');
+const fileupload = require('express-fileupload');
 const connectDB = require('./config/db');
 const user = require('./routes/user');
 const twits = require('./routes/twits');
@@ -25,6 +26,8 @@ app.use('/api/v1/auth', auth);
 app.use('/api/v1/twits', twits);
 app.use('/api/v1/:username', profile);
 
+app.use(fileupload());
+
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
   // Set static folder
@@ -33,6 +36,8 @@ if (process.env.NODE_ENV === 'production') {
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
+} else {
+  app.use(express.static(path.join(__dirname, 'client', 'public')));
 }
 
 app.listen(PORT, () => {

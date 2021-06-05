@@ -1,3 +1,6 @@
+const multer = require('multer');
+const sharp = require('sharp');
+const path = require('path');
 const User = require('../models/User');
 const Profile = require('../models/Profile');
 const asyncHandler = require('../middleware/async');

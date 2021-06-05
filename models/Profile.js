@@ -19,6 +19,9 @@ const ProfileSchema = new mongoose.Schema(
       type: String,
       maxLength: 50,
     },
+    avatar: {
+      type: String,
+    },
   },
   {
     toJSON: { virtuals: true },
