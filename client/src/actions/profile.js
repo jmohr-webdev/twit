@@ -11,8 +11,7 @@ import {
 export const getProfile = (username) => async (dispatch) => {
   try {
     const res = await axios.get(`/api/v1/${username}`);
-
-    dispatch({ type: GET_USER_TWITS, payload: res.data.twits });
+    dispatch({ type: GET_USER_TWITS, payload: res.data.profile.twits });
     dispatch({ type: GET_PROFILE, payload: res.data.profile });
   } catch (error) {
     dispatch({ type: PROFILE_ERROR });

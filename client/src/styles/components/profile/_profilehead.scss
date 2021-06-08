@@ -21,6 +21,13 @@
   padding-bottom: 20px;
 }
 
+.profile-avatar {
+  border-radius: 50%;
+  max-width: 200px;
+  max-height: 200px;
+  border: 5px solid $bright-white;
+}
+
 .avatar-container i {
   color: $bright-white;
 }
@@ -48,6 +55,7 @@
 
 .btn-follow,
 .btn-edit,
+.btn-photo,
 .btn-unfollow {
   margin-top: 20px;
   width: 100%;
@@ -67,6 +75,10 @@
   background-color: $action-color;
 }
 
+.btn-photo {
+  background-color: $bright-color;
+}
+
 .btn-unfollow {
   background-color: $danger-color;
 }
@@ -75,7 +87,6 @@
 .btn-follow:active,
 .btn-edit:hover,
 .btn-edit:active {
-  transform: $scale;
   background-color: $bright-action-color;
 }
 

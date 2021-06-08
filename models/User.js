@@ -33,12 +33,12 @@ const UserSchema = new mongoose.Schema(
   }
 );
 
-UserSchema.virtual('twits', {
-  ref: 'Twit',
-  localField: '_id',
-  foreignField: 'user',
-  justOne: false,
-  options: { sort: { createdDate: -1 } },
-});
+// UserSchema.virtual('twits', {
+//   ref: 'Twit',
+//   localField: '_id',
+//   foreignField: 'user',
+//   justOne: false,
+//   options: { sort: { createdDate: -1 } },
+// });
 
 module.exports = mongoose.model('User', UserSchema);

@@ -5,7 +5,6 @@ import { getAllTwits } from '../../actions/twits';
 import ModalPostButton from '../layout/ModalPostButton';
 import PostModal from '../layout/PostModal';
 import Twit from '../twits/Twit';
-import NoTwits from '../twits/NoTwits';
 
 const Home = ({ getAllTwits, twits, modalOpen, isAuthenticated }) => {
   useEffect(() => {
@@ -16,14 +15,16 @@ const Home = ({ getAllTwits, twits, modalOpen, isAuthenticated }) => {
     <>
       {twits.length > 0 ? (
         <>
-          <div className="twits-container">
+          <div className="twits-container home">
             {twits.map((twit) => (
               <Twit twit={twit} key={twit._id} />
             ))}
           </div>
         </>
       ) : (
-        <NoTwits msg={'No one has twitted anything yet.'} />
+        <div className="no-twits-container home">
+          <h1 className="no-twits-content">No one has twitted anything.</h1>
+        </div>
       )}
 
       {isAuthenticated && (

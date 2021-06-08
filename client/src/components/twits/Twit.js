@@ -13,7 +13,16 @@ const Twit = ({ twit, user, deleteTwit }) => {
       <div className={`twit ${currentUser ? 'flat-bottom' : ''} `}>
         <Link to={`/${twit.username}`}>
           <div className="author-container">
-            <i className="fas fa-user-circle fa-3x"></i>
+            {twit.twitAvatar ? (
+              <img
+                src={`/img/avatars/${twit.twitAvatar}`}
+                alt={`${twit.username}-avatar`}
+                className="twit-avatar"
+              />
+            ) : (
+              <i className="fas fa-user-circle fa-3x"></i>
+            )}
+
             <div className="twit-author">{twit.username}</div>
           </div>
         </Link>
@@ -35,7 +44,8 @@ const Twit = ({ twit, user, deleteTwit }) => {
 };
 
 Twit.propTypes = {
-  twit: PropTypes.object.isRequired,
+  twit: PropTypes.object,
+  user: PropTypes.object,
   deleteTwit: PropTypes.func.isRequired,
 };
 

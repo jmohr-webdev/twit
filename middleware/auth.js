@@ -1,6 +1,4 @@
-const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
-const colors = require('colors');
 const User = require('../models/User');
 
 module.exports = async function (req, res, next) {

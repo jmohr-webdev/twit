@@ -1,16 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ProfileButton from './ProfileButton';
+import ProfileAvatar from './ProfileAvatar';
 
-const ProfileHead = ({ profile, isAuthenticated }) => {
+const ProfileHead = ({ profile, user, isAuthenticated }) => {
+  const [isCurrentUser, setCurrentUser] = useState(false);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      setCurrentUser(profile.username === user.username);
+    }
+  }, [user.username, profile.username, isAuthenticated]);
+
   const { username, bio, location, name } = profile;
 
   return (
     <div className="profile-head">
       <div className="profile-container">
         <div className="avatar-container">
-          <i className="fas fa-user-circle fa-8x"></i>
+          <ProfileAvatar currentUser={isCurrentUser || false} />
+          {/* {avatar ? (
+            <img
+              className="profile-avatar"
+              alt={`${username}-avatar`}
+              src={`/img/avatars/${avatar}`}
+            />
+          ) : (
+            <i className="fas fa-user-circle fa-8x"></i>
+          )} */}
         </div>
         <div className="details-container">
           <div className="details-name">
@@ -25,7 +43,9 @@ const ProfileHead = ({ profile, isAuthenticated }) => {
               Location: {location ? location : 'No location given'}{' '}
             </p>
           </div>
-          {isAuthenticated && <ProfileButton profile={profile} />}
+          {isAuthenticated && (
+            <ProfileButton currentUser={isCurrentUser || false} />
+          )}
         </div>
       </div>
     </div>
@@ -34,10 +54,13 @@ const ProfileHead = ({ profile, isAuthenticated }) => {
 
 ProfileHead.propTypes = {
   profile: PropTypes.object.isRequired,
+  user: PropTypes.object,
   isAuthenticated: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
+  user: state.auth.user,
+  profile: state.profile.profile,
   isAuthenticated: state.auth.isAuthenticated,
 });
 

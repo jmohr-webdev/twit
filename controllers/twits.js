@@ -10,7 +10,10 @@ const asyncHandler = require('../middleware/async');
 // does not require authentication
 exports.getTwits = asyncHandler(async (req, res, next) => {
   try {
-    let twits = await Twit.find().sort({ createdDate: -1 }).limit(10);
+    let twits = await Twit.find()
+      .sort({ createdDate: -1 })
+      .limit(10)
+      .populate();
     if (!twits) {
       return res
         .status(204)
@@ -56,13 +59,17 @@ exports.getSingleTwit = asyncHandler(async (req, res, next) => {
 // does not require authentication
 exports.getUserTwits = asyncHandler(async (req, res, next) => {
   try {
-    const user = await await User.findOne({ username: req.params.username });
+    const profile = await Profile.findOne({
+      username: req.params.username,
+    });
 
-    if (!user) {
+    if (!profile) {
       return res.status(400).json({ msg: 'User not found', success: false });
     }
 
-    const twits = await Twit.find({ user: user._id }).sort({ createdDate: -1 });
+    const twits = await Twit.find({ profile: profile._id }).sort({
+      createdDate: -1,
+    });
 
     res.status(200).json({
       msg: 'Twits found',
@@ -123,12 +130,13 @@ exports.getFollowingTwits = asyncHandler(async (req, res, next) => {
 // requires authentication
 exports.createATwit = asyncHandler(async (req, res, next) => {
   try {
-    const user = await User.findById(req.user.id).select('-password');
+    // const user = await User.findById(req.user.id).select('-password');
+    const profile = await Profile.findOne({ user: req.user.id });
 
     const newTwit = new Twit({
       content: req.body.content,
-      username: user.username,
-      user: req.user.id,
+      username: profile.username,
+      profile: profile._id,
     });
 
     await Twit.create(newTwit);

@@ -7,7 +7,6 @@ import ModalPostButton from '../../layout/ModalPostButton';
 import PostModal from '../../layout/PostModal';
 import ProfileEditModal from './ProfileEditModal';
 import Twit from '../../twits/Twit';
-import NoTwits from '../../twits/NoTwits';
 
 const Profile = ({
   match,
@@ -35,7 +34,11 @@ const Profile = ({
           </div>
         </>
       ) : (
-        <NoTwits msg={`This user hasn't twitted anything yet.`} />
+        <div className="no-twits-container profile">
+          <h1 className="no-twits-content">
+            This user hasn't twitted anything yet.
+          </h1>
+        </div>
       )}
 
       {isAuthenticated && (

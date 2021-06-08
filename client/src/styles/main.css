@@ -313,7 +313,7 @@
           flex-direction: column;
   width: 80%;
   max-width: 800px;
-  height: 400px;
+  height: 300px;
   margin-top: 100px;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 5px;
@@ -400,7 +400,7 @@
   padding: 10px;
   border-radius: 5px;
   width: 90%;
-  height: 250px;
+  height: 150px;
   resize: none;
 }
 
@@ -443,6 +443,13 @@
   padding-bottom: 20px;
 }
 
+.profile-avatar {
+  border-radius: 50%;
+  max-width: 200px;
+  max-height: 200px;
+  border: 5px solid #fff;
+}
+
 .avatar-container i {
   color: #fff;
 }
@@ -470,6 +477,7 @@
 
 .btn-follow,
 .btn-edit,
+.btn-photo,
 .btn-unfollow {
   margin-top: 20px;
   width: 100%;
@@ -490,6 +498,10 @@
   background-color: #008716;
 }
 
+.btn-photo {
+  background-color: #d41e45;
+}
+
 .btn-unfollow {
   background-color: #542d51;
 }
@@ -498,8 +510,6 @@
 .btn-follow:active,
 .btn-edit:hover,
 .btn-edit:active {
-  -webkit-transform: scale(1.02);
-          transform: scale(1.02);
   background-color: #1ed442;
 }
 
@@ -525,7 +535,7 @@ form.profile-form {
 }
 
 .form-group textarea {
-  height: 150px;
+  height: 75px;
   resize: none;
 }
 
@@ -540,13 +550,18 @@ form.profile-form {
 }
 
 .twits-container {
-  margin-top: 100px;
+  margin-top: 50px;
   width: 80%;
   max-width: 800px;
 }
 
 .twits-container.profile {
   margin-top: 50px;
+}
+
+.twits-container.home,
+.twits-container.following {
+  margin-top: 100px;
 }
 
 .twit {
@@ -580,18 +595,19 @@ form.profile-form {
   height: 50px;
 }
 
-/* Add back in once photo uploads are enabled 
-.avatar img {
+.twit-avatar {
   height: 50px;
   width: 50px;
-  border-radius: 50px;
-  border: 3px solid #1b1521;
+  border-radius: 50%;
+  border: 3px solid #542d51;
 }
-*/
+
 .twit-author {
+  font-family: 'Raleway', serif;
   font-weight: 600;
   color: #542d51;
-  margin-left: 10px;
+  margin-left: 15px;
+  text-transform: uppercase;
 }
 
 .twit-date {
@@ -623,7 +639,7 @@ form.profile-form {
   width: 80%;
   max-width: 800px;
   min-height: 200px;
-  margin-top: 100px;
+  margin-top: 50px;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 5px;
   border: 1px solid #fff;
@@ -636,6 +652,11 @@ form.profile-form {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.no-twits-container.home,
+.no-twits-container.following {
+  margin-top: 100px;
 }
 
 .no-twits-content {

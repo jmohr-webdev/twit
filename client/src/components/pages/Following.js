@@ -6,7 +6,6 @@ import { getFollowingTwits } from '../../actions/twits';
 import ModalPostButton from '../layout/ModalPostButton';
 import PostModal from '../layout/PostModal';
 import Twit from '../twits/Twit';
-import NoTwits from '../twits/NoTwits';
 
 const Following = ({
   getFollowingTwits,
@@ -27,19 +26,19 @@ const Following = ({
   return (
     <>
       {twits.length > 0 ? (
-        <div className="twits-container">
+        <div className="twits-container following">
           {twits.map((twit) => (
             <Twit twit={twit} key={twit._id} />
           ))}
         </div>
       ) : (
-        <NoTwits
-          msg={
-            following <= 0
+        <div className="no-twits-container following">
+          <h1 className="no-twits-content">
+            {following <= 0
               ? `You're not following anyone yet.`
-              : `No one you follow has twitted anything yet`
-          }
-        />
+              : `No one you follow has twitted anything yet`}
+          </h1>
+        </div>
       )}
 
       {isAuthenticated && (

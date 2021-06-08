@@ -1,11 +1,16 @@
 .twits-container {
-  margin-top: 100px;
+  margin-top: 50px;
   width: 80%;
   max-width: 800px;
 
   &.profile {
     margin-top: 50px;
   }
+}
+
+.twits-container.home,
+.twits-container.following {
+  margin-top: 100px;
 }
 
 .twit {
@@ -35,19 +40,20 @@
   height: 50px;
 }
 
-/* Add back in once photo uploads are enabled 
-.avatar img {
+// Add back in once photo uploads are enabled
+.twit-avatar {
   height: 50px;
   width: 50px;
-  border-radius: 50px;
-  border: 3px solid #1b1521;
+  border-radius: 50%;
+  border: 3px solid $danger-color;
 }
-*/
 
 .twit-author {
+  font-family: 'Raleway', serif;
   font-weight: 600;
   color: $danger-color;
-  margin-left: 10px;
+  margin-left: 15px;
+  text-transform: uppercase;
 }
 
 .twit-date {

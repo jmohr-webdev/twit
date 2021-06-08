@@ -3,8 +3,8 @@ const sharp = require('sharp');
 const mkdirp = require('mkdirp-promise');
 const fs = require('fs');
 const path = require('path');
-const User = require('../models/User');
 const Profile = require('../models/Profile');
+const Twit = require('../models/Twit');
 const asyncHandler = require('../middleware/async');
 
 const multerStorage = multer.memoryStorage();
@@ -41,12 +41,24 @@ exports.resizeAvatar = asyncHandler(async (req, res, next) => {
 
   req.files.filename = `avatar-${req.params.username}-${Date.now()}.jpeg`;
   const filePath = imagePath + req.files.filename;
+  const smallFilePath = imagePath + 'small-' + req.files.filename;
 
-  const file = await sharp(req.files.avatar[0].buffer)
-    .resize(300)
+  await sharp(req.files.avatar[0].buffer)
+    .resize(200)
     .toFormat('jpeg')
     .jpeg({ quality: 90 })
     .toFile(filePath, (err, info) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+    });
+
+  await sharp(req.files.avatar[0].buffer)
+    .resize(50)
+    .toFormat('jpeg')
+    .jpeg({ quality: 90 })
+    .toFile(smallFilePath, (err, info) => {
       if (err) {
         console.log(err);
         return;
@@ -65,20 +77,31 @@ exports.saveAvatar = asyncHandler(async (req, res, next) => {
       return res.status(400).json({ msg: 'No profile found' });
     }
 
-    if (profile.avatar) {
+    if (fs.existsSync(imagePath + profile.avatar)) {
       const filePath = imagePath + profile.avatar;
       console.log(`Deleting ${filePath}`.blue);
-      fs.unlinkSync(filePath, (err) => {
-        console.log(err);
-      });
+      fs.unlinkSync(imagePath + profile.avatar);
+      console.log('finished deleting'.blue);
     }
 
-    const updatedProfile = await Profile.findOneAndUpdate(
+    if (fs.existsSync(imagePath + profile.smallAvatar)) {
+      const filePath = imagePath + profile.smallAvatar;
+      console.log(`Deleting ${filePath}`.blue);
+      fs.unlinkSync(imagePath + profile.smallAvatar);
+      console.log('finished deleting'.blue);
+    }
+
+    await Profile.updateOne(
       { username: req.params.username },
       { avatar: req.files.filename }
     );
 
-    res.status(200).json({ profile: updatedProfile, success: true });
+    await Twit.updateMany(
+      { profile: profile._id },
+      { twitAvatar: `small-${req.files.filename}` }
+    );
+
+    res.status(200).json({ success: true });
   } catch (error) {
     res.status(500).json({ msg: error.message, success: false });
   }

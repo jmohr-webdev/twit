@@ -1,6 +1,3 @@
-const multer = require('multer');
-const sharp = require('sharp');
-const path = require('path');
 const User = require('../models/User');
 const Profile = require('../models/Profile');
 const asyncHandler = require('../middleware/async');
@@ -11,30 +8,27 @@ const asyncHandler = require('../middleware/async');
 // does not require authentication
 exports.getProfile = asyncHandler(async (req, res, next) => {
   try {
-    const user = await User.findOne({ username: req.params.username }).populate(
-      {
-        path: 'twits',
-        options: { sort: { createdDate: -1 } },
-      }
-    );
+    const profile = await Profile.findOne({
+      username: req.params.username,
+    }).populate({
+      path: 'twits',
+      options: { sort: { createdDate: -1 } },
+    });
 
-    const twits = user.twits;
+    const twits = profile.twits;
 
-    if (!user) {
+    if (!profile) {
       return res.status(400).json({
         msg: `User ${req.params.username} does not exist`,
         success: false,
       });
     }
 
-    const profile = await Profile.findOne({ user: user._id });
-
     res.status(200).json({
       msg: `Found profile of ${req.params.username}`,
       success: true,
       profile,
       numberOfTwits: twits.length,
-      twits,
     });
   } catch (error) {
     res.status(500).json({
