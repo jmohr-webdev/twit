@@ -35,15 +35,12 @@ exports.uploadAvatar = upload.single('avatar');
 
 // Resizes and names the avatar
 exports.resizeAvatar = asyncHandler(async (req, res, next) => {
-  console.log('resize avatar called'.green);
   if (!req.file) return next();
-  console.log('there was a file');
 
   await mkdirp('client/public/img/avatars');
 
   req.file.filename = `avatar-${req.params.username}-${Date.now()}.jpeg`;
 
-  console.log(req.file.filename);
   const filePath = imagePath + req.file.filename;
   const smallFilePath = imagePath + 'small-' + req.file.filename;
 
@@ -74,7 +71,6 @@ exports.resizeAvatar = asyncHandler(async (req, res, next) => {
 
 // Saves avatar to user profile
 exports.saveAvatar = asyncHandler(async (req, res, next) => {
-  console.log('saveAvatar called'.green);
   try {
     const profile = await Profile.findOne({ username: req.params.username });
 
@@ -86,14 +82,12 @@ exports.saveAvatar = asyncHandler(async (req, res, next) => {
       const filePath = imagePath + profile.avatar;
       console.log(`Deleting ${filePath}`.blue);
       fs.unlinkSync(imagePath + profile.avatar);
-      console.log('finished deleting'.blue);
     }
 
     if (fs.existsSync(imagePath + profile.smallAvatar)) {
       const filePath = imagePath + profile.smallAvatar;
       console.log(`Deleting ${filePath}`.blue);
       fs.unlinkSync(imagePath + profile.smallAvatar);
-      console.log('finished deleting'.blue);
     }
 
     await Profile.updateOne(
@@ -106,7 +100,10 @@ exports.saveAvatar = asyncHandler(async (req, res, next) => {
       { twitAvatar: `small-${req.file.filename}` }
     );
 
-    res.status(200).json({ success: true });
+    res.status(200).json({
+      success: true,
+      profile,
+    });
   } catch (error) {
     res.status(500).json({ msg: error.message, success: false });
   }

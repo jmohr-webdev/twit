@@ -30,7 +30,7 @@ const EditModal = ({
       setFormData(profileData);
       setTempAvatar(`/img/avatars/${profileData.avatar}`);
     }
-  }, [profile, loading, setTempAvatar]);
+  }, [loading, setTempAvatar]);
 
   const { bio, location } = formData;
 
@@ -60,9 +60,10 @@ const EditModal = ({
     e.preventDefault();
     if (changedAvatar) {
       updateAvatar(profile.username, formData.avatar);
-      setFormData({ ...formData, avatar: '' });
+      setFormData({ avatar: '' });
     }
     updateProfile(profile.username, formData);
+
     handleClose();
   };
 
@@ -76,8 +77,6 @@ const EditModal = ({
             handleClose();
           }}
         ></i>
-
-        {/* <form encType="multipart/form-data" METHOD="PUT"> */}
 
         <form
           className="profile-form"
@@ -104,16 +103,6 @@ const EditModal = ({
               <span></span>
             </div>
           </div>
-          {/* </form> */}
-          {/* 
-        <form
-          className="profile-form"
-          onSubmit={(e) => {
-            e.preventDefault();
-            updateProfile(profile.username, formData);
-            handleClose();
-          }}
-        > */}
           <div className="form-group">
             <textarea
               type="text"

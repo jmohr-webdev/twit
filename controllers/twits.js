@@ -137,6 +137,7 @@ exports.createATwit = asyncHandler(async (req, res, next) => {
       content: req.body.content,
       username: profile.username,
       profile: profile._id,
+      twitAvatar: profile.smallAvatar,
     });
 
     await Twit.create(newTwit);

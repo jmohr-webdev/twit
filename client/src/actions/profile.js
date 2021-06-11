@@ -45,19 +45,13 @@ export const updateProfile = (username, formData) => async (dispatch) => {
 
 // ************************************* UPlOAD A PHOTO *************************************
 export const updateAvatar = (username, avatar) => async (dispatch) => {
-  console.log('updateAvatar called');
-  // const config = {
-  //   headers: {
-  //     'Content-Type': 'multipart/form-data',
-  //   },
-  // };
-
   try {
     const changeAvatar = new FormData();
     changeAvatar.append('avatar', avatar);
+
     const res = await axios.put(`api/v1/${username}/avatar`, changeAvatar);
 
-    dispatch({ type: UPDATE_AVATAR });
+    dispatch({ type: UPDATE_AVATAR, payload: res.data.profile });
   } catch (error) {
     dispatch({ type: PROFILE_ERROR });
     dispatch(popupToast(error.response.data.msg, 'failure'));
