@@ -520,10 +520,37 @@
   background-color: #9c4b96;
 }
 
+.modal.edit {
+  height: 450px;
+}
+
+.edit-avatar-container {
+  margin-top: 75px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.edit-profile-avatar {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}
+
+.upload-image {
+  display: none;
+}
+
 form.profile-form {
   display: block;
   width: 90%;
-  margin: 70px auto 0;
+  margin: 50px auto 0;
 }
 
 .form-group input,

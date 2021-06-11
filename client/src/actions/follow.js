@@ -26,7 +26,6 @@ export const followUser = (username) => async (dispatch) => {
     dispatch(popupToast(`You followed ${username}`, 'success'));
   } catch (error) {
     dispatch({ type: FOLLOWING_ERROR });
-    console.log(error);
     dispatch(popupToast(error, 'failure'));
   }
 };

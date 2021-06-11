@@ -1,4 +1,9 @@
-import { GET_PROFILE, UPDATE_PROFILE, PROFILE_ERROR } from '../actions/types';
+import {
+  GET_PROFILE,
+  UPDATE_PROFILE,
+  UPDATE_AVATAR,
+  PROFILE_ERROR,
+} from '../actions/types';
 
 const initialState = {
   profile: {},
@@ -18,6 +23,7 @@ function profileReducer(state = initialState, action) {
         loading: false,
       };
     case PROFILE_ERROR:
+    case UPDATE_AVATAR:
       return {
         ...state,
         loading: false,

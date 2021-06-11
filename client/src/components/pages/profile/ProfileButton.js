@@ -64,7 +64,6 @@ const ProfileButton = ({
 
 ProfileButton.propTypes = {
   profile: PropTypes.object.isRequired,
-  following: PropTypes.bool.isRequired,
   currentUser: PropTypes.bool.isRequired,
   followUser: PropTypes.func.isRequired,
   unfollowUser: PropTypes.func.isRequired,

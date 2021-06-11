@@ -26,24 +26,28 @@ const upload = multer({
 });
 
 // ************ PUT ROUTE ************
-// Route: PUT /api/v1/:username/photo
-// Uploads a photo
+// Route: PUT /api/v1/:username/avatar
+// Uploads a avatar
 // requires authentication
 
 // Uploads the avatar
-exports.uploadAvatar = upload.fields([{ name: 'avatar', maxCount: 1 }]);
+exports.uploadAvatar = upload.single('avatar');
 
 // Resizes and names the avatar
 exports.resizeAvatar = asyncHandler(async (req, res, next) => {
-  if (!req.files.avatar) return next();
+  console.log('resize avatar called'.green);
+  if (!req.file) return next();
+  console.log('there was a file');
 
   await mkdirp('client/public/img/avatars');
 
-  req.files.filename = `avatar-${req.params.username}-${Date.now()}.jpeg`;
-  const filePath = imagePath + req.files.filename;
-  const smallFilePath = imagePath + 'small-' + req.files.filename;
+  req.file.filename = `avatar-${req.params.username}-${Date.now()}.jpeg`;
 
-  await sharp(req.files.avatar[0].buffer)
+  console.log(req.file.filename);
+  const filePath = imagePath + req.file.filename;
+  const smallFilePath = imagePath + 'small-' + req.file.filename;
+
+  await sharp(req.file.buffer)
     .resize(200)
     .toFormat('jpeg')
     .jpeg({ quality: 90 })
@@ -54,7 +58,7 @@ exports.resizeAvatar = asyncHandler(async (req, res, next) => {
       }
     });
 
-  await sharp(req.files.avatar[0].buffer)
+  await sharp(req.file.buffer)
     .resize(50)
     .toFormat('jpeg')
     .jpeg({ quality: 90 })
@@ -70,6 +74,7 @@ exports.resizeAvatar = asyncHandler(async (req, res, next) => {
 
 // Saves avatar to user profile
 exports.saveAvatar = asyncHandler(async (req, res, next) => {
+  console.log('saveAvatar called'.green);
   try {
     const profile = await Profile.findOne({ username: req.params.username });
 
@@ -93,12 +98,12 @@ exports.saveAvatar = asyncHandler(async (req, res, next) => {
 
     await Profile.updateOne(
       { username: req.params.username },
-      { avatar: req.files.filename }
+      { avatar: req.file.filename, smallAvatar: `small-${req.file.filename}` }
     );
 
     await Twit.updateMany(
       { profile: profile._id },
-      { twitAvatar: `small-${req.files.filename}` }
+      { twitAvatar: `small-${req.file.filename}` }
     );
 
     res.status(200).json({ success: true });
