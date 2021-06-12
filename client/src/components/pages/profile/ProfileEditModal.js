@@ -30,7 +30,7 @@ const EditModal = ({
       setFormData(profileData);
       setTempAvatar(`/img/avatars/${profileData.avatar}`);
     }
-  }, [loading, setTempAvatar]);
+  }, [loading, setTempAvatar, profile]);
 
   const { bio, location } = formData;
 

@@ -27,8 +27,8 @@ function profileReducer(state = initialState, action) {
         ...state,
         profile: {
           ...state.profile,
-          avatar: payload.newAvatar,
-          smallAvatar: payload.newSmallAvatar,
+          avatar: payload.avatar,
+          smallAvatar: payload.smallAvatar,
         },
       };
     case PROFILE_ERROR:

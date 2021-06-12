@@ -19,7 +19,7 @@ const Profile = ({
 }) => {
   useEffect(() => {
     getProfile(match.params.username);
-  }, [getProfile, match.params.username, profile]);
+  }, [getProfile, match.params.username]);
 
   return (
     <>

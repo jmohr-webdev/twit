@@ -36,12 +36,9 @@ const Modal = ({ toggleModal, postTwit }) => {
             required
           />
           <div className="form-buttons">
-            <input
-              type="cancel"
-              className="btn cancel"
-              value="Cancel"
-              onClick={handleClose}
-            />
+            <button type="button" className="btn cancel" onClick={handleClose}>
+              Cancel
+            </button>
             <input type="submit" className="btn post" value="Post" />
           </div>
         </form>

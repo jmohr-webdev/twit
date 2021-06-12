@@ -20,15 +20,6 @@ const ProfileHead = ({ profile, user, isAuthenticated }) => {
       <div className="profile-container">
         <div className="avatar-container">
           <ProfileAvatar currentUser={isCurrentUser || false} />
-          {/* {avatar ? (
-            <img
-              className="profile-avatar"
-              alt={`${username}-avatar`}
-              src={`/img/avatars/${avatar}`}
-            />
-          ) : (
-            <i className="fas fa-user-circle fa-8x"></i>
-          )} */}
         </div>
         <div className="details-container">
           <div className="details-name">

@@ -72,7 +72,7 @@ exports.resizeAvatar = asyncHandler(async (req, res, next) => {
 // Saves avatar to user profile
 exports.saveAvatar = asyncHandler(async (req, res, next) => {
   try {
-    const profile = await Profile.findOne({ username: req.params.username });
+    let profile = await Profile.findOne({ username: req.params.username });
 
     if (!profile) {
       return res.status(400).json({ msg: 'No profile found' });
@@ -90,9 +90,10 @@ exports.saveAvatar = asyncHandler(async (req, res, next) => {
       fs.unlinkSync(imagePath + profile.smallAvatar);
     }
 
-    await Profile.updateOne(
+    profile = await Profile.findOneAndUpdate(
       { username: req.params.username },
-      { avatar: req.file.filename, smallAvatar: `small-${req.file.filename}` }
+      { avatar: req.file.filename, smallAvatar: `small-${req.file.filename}` },
+      { new: true }
     );
 
     await Twit.updateMany(
