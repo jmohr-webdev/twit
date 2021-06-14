@@ -8,10 +8,10 @@ const ProfileHead = ({ profile, user, isAuthenticated }) => {
   const [isCurrentUser, setCurrentUser] = useState(false);
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated && user.username) {
       setCurrentUser(profile.username === user.username);
     }
-  }, [user.username, profile.username, isAuthenticated]);
+  }, [profile.username, isAuthenticated, user]);
 
   const { username, bio, location, name } = profile;
 

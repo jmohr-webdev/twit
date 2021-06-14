@@ -57,50 +57,6 @@
   color: $bright-white;
 }
 
-.btn.post,
-.btn.save,
-.btn.cancel {
-  display: inline-block;
-  position: absolute;
-  width: 150px;
-  height: 50px;
-  border: 0;
-  border-radius: 5px;
-  color: $bright-white;
-  text-transform: uppercase;
-  text-align: center;
-  font-weight: 600;
-  font-size: 1.25rem;
-  outline: none;
-  transition: all 0.2s ease-in-out;
-}
-
-.btn.post,
-.btn.save {
-  bottom: 10px;
-  right: 10px;
-  width: 150px;
-  background-color: $action-color;
-}
-
-.btn.cancel {
-  bottom: 10px;
-  right: 170px;
-  background-color: $bright-color;
-}
-
-.btn.cancel:hover,
-.btn.cancel:active {
-  background-color: $darker-bright;
-}
-
-.btn.post:hover,
-.btn.post:active,
-.btn.save:hover,
-.btn.save:active {
-  background-color: $bright-action-color;
-}
-
 .twit-post-content {
   display: block;
   margin: 70px auto 0;
