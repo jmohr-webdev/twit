@@ -15,7 +15,9 @@
 .profile-container {
   margin-top: 20px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 80%;
   max-width: 800px;
   padding-bottom: 20px;
@@ -23,6 +25,9 @@
 
 .profile-avatar {
   border-radius: 50%;
+  margin: 0 auto;
+  width: 200px;
+  height: 200px;
   max-width: 200px;
   max-height: 200px;
   border: 5px solid $bright-white;
@@ -33,9 +38,13 @@
 }
 
 .details-container {
-  margin-left: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
   color: $base-white-color;
-  max-width: 40%;
+  max-width: 100%;
 }
 
 .details-container h1 {
@@ -53,13 +62,16 @@
   margin-bottom: 20px;
 }
 
+.details-username {
+  text-align: center;
+}
+
 .btn-follow,
 .btn-edit,
 .btn-photo,
 .btn-unfollow {
   margin-top: 20px;
   width: 100%;
-  max-width: 200px;
   padding: 10px;
   border: 0;
   border-radius: 5px;

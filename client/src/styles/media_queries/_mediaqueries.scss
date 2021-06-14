@@ -39,6 +39,22 @@
   }
 }
 
+/* ******************* LARGE: >768 BREAKPOINT ******************* */
+@media screen and (min-width: 768px) {
+  .profile-container {
+    flex-direction: row;
+  }
+
+  .details-container {
+    align-items: flex-start;
+    margin-left: 50px;
+  }
+
+  .details-username {
+    text-align: left;
+  }
+}
+
 /* ******************* LARGE: >992 BREAKPOINT ******************* */
 @media screen and (min-width: 992px) {
   .navbar {

@@ -13,11 +13,7 @@ const ProfileAvatar = ({ profile, auth }) => {
 
   const noAvatar = <i className="fas fa-user-circle fa-8x"></i>;
 
-  return (
-    <div className="avatar-container">
-      {profile.avatar ? hasAvatar : noAvatar}
-    </div>
-  );
+  return <> {profile.avatar ? hasAvatar : noAvatar}</>;
 };
 
 ProfileAvatar.propTypes = {};

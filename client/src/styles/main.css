@@ -394,51 +394,6 @@
   color: #fff;
 }
 
-.btn.post,
-.btn.save,
-.btn.cancel {
-  display: inline-block;
-  position: absolute;
-  width: 150px;
-  height: 50px;
-  border: 0;
-  border-radius: 5px;
-  color: #fff;
-  text-transform: uppercase;
-  text-align: center;
-  font-weight: 600;
-  font-size: 1.25rem;
-  outline: none;
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
-}
-
-.btn.post,
-.btn.save {
-  bottom: 10px;
-  right: 10px;
-  width: 150px;
-  background-color: #008716;
-}
-
-.btn.cancel {
-  bottom: 10px;
-  right: 170px;
-  background-color: #d41e45;
-}
-
-.btn.cancel:hover,
-.btn.cancel:active {
-  background-color: #a11634;
-}
-
-.btn.post:hover,
-.btn.post:active,
-.btn.save:hover,
-.btn.save:active {
-  background-color: #1ed442;
-}
-
 .twit-post-content {
   display: block;
   margin: 70px auto 0;
@@ -479,10 +434,16 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
+  -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   width: 80%;
   max-width: 800px;
   padding-bottom: 20px;
@@ -490,6 +451,9 @@
 
 .profile-avatar {
   border-radius: 50%;
+  margin: 0 auto;
+  width: 200px;
+  height: 200px;
   max-width: 200px;
   max-height: 200px;
   border: 5px solid #fff;
@@ -500,9 +464,22 @@
 }
 
 .details-container {
-  margin-left: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 20px;
   color: #ccc;
-  max-width: 40%;
+  max-width: 100%;
 }
 
 .details-container h1 {
@@ -520,13 +497,16 @@
   margin-bottom: 20px;
 }
 
+.details-username {
+  text-align: center;
+}
+
 .btn-follow,
 .btn-edit,
 .btn-photo,
 .btn-unfollow {
   margin-top: 20px;
   width: 100%;
-  max-width: 200px;
   padding: 10px;
   border: 0;
   border-radius: 5px;
@@ -773,6 +753,25 @@ form.profile-form {
   }
   .nav-links a:hover {
     color: #fff;
+  }
+}
+
+/* ******************* LARGE: >768 BREAKPOINT ******************* */
+@media screen and (min-width: 768px) {
+  .profile-container {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+  .details-container {
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    margin-left: 50px;
+  }
+  .details-username {
+    text-align: left;
   }
 }
 
