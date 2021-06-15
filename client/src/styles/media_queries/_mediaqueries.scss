@@ -45,6 +45,10 @@
     flex-direction: row;
   }
 
+  .modal i {
+    color: $base-white-color;
+  }
+
   .details-container {
     align-items: flex-start;
     margin-left: 50px;
@@ -53,6 +57,13 @@
   .details-username {
     text-align: left;
   }
+
+  .btn-follow,
+  .btn-edit,
+  .btn-photo,
+  .btn-unfollow {
+    max-width: 200px;
+  }
 }
 
 /* ******************* LARGE: >992 BREAKPOINT ******************* */
@@ -60,21 +71,5 @@
   .navbar {
     justify-content: center;
     margin-left: 0;
-  }
-
-  .circle-container {
-    background-color: rgba(0, 0, 0, 0.25);
-    justify-content: right;
-    flex-direction: column;
-    align-items: center;
-    width: 80px;
-    height: 100%;
-    left: 0;
-    padding-top: 70px;
-    border-bottom: 3px solid #ff798f;
-  }
-
-  .circle-icon {
-    margin-left: 20px;
   }
 }

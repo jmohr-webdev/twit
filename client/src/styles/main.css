@@ -386,7 +386,7 @@
   font-size: 1.5em;
   right: 10px;
   top: 10px;
-  color: #ccc;
+  color: #fff;
   z-index: 2;
 }
 
@@ -407,6 +407,15 @@
 .twit-post-content:focus {
   outline: none;
   border: #d41e45;
+}
+
+Footer {
+  width: 100%;
+  background-color: #1b1521;
+  height: 50px;
+  border-top: 1px solid #ff798f;
+  position: absolute;
+  bottom: 0;
 }
 
 .profile-head {
@@ -705,6 +714,7 @@ form.profile-form {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  text-align: center;
 }
 
 .no-twits-container.home,
@@ -764,6 +774,9 @@ form.profile-form {
         -ms-flex-direction: row;
             flex-direction: row;
   }
+  .modal i {
+    color: #ccc;
+  }
   .details-container {
     -webkit-box-align: start;
         -ms-flex-align: start;
@@ -772,6 +785,12 @@ form.profile-form {
   }
   .details-username {
     text-align: left;
+  }
+  .btn-follow,
+  .btn-edit,
+  .btn-photo,
+  .btn-unfollow {
+    max-width: 200px;
   }
 }
 
@@ -782,27 +801,6 @@ form.profile-form {
         -ms-flex-pack: center;
             justify-content: center;
     margin-left: 0;
-  }
-  .circle-container {
-    background-color: rgba(0, 0, 0, 0.25);
-    -webkit-box-pack: right;
-        -ms-flex-pack: right;
-            justify-content: right;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    width: 80px;
-    height: 100%;
-    left: 0;
-    padding-top: 70px;
-    border-bottom: 3px solid #ff798f;
-  }
-  .circle-icon {
-    margin-left: 20px;
   }
 }
 
